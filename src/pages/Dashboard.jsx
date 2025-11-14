@@ -14,9 +14,9 @@ export default function Dashboard() {
           <div className="calendar-card">
             <div className="calendar-header">
               <h2 className="calendar-title">Oct, Week 42</h2>
-              <div className="calendar-profile">
+              <Link to="/profile" className="calendar-profile">
                 <i className="fas fa-user" style={{ color: 'white', fontSize: '20px' }}></i>
-              </div>
+              </Link>
             </div>
             <div className="calendar-inner">
               <div className="calendar-weekdays">
@@ -157,6 +157,13 @@ export default function Dashboard() {
           display: flex;
           align-items: center;
           justify-content: center;
+          text-decoration: none;
+          cursor: pointer;
+          transition: background 0.2s ease;
+        }
+
+        .calendar-profile:hover {
+          background: rgba(255, 255, 255, 0.15);
         }
 
         .calendar-inner {
@@ -190,14 +197,15 @@ export default function Dashboard() {
         }
 
         .bookings-bar {
-          border: 1px solid white;
-          border-radius: 100px;
+          border: 1.352px solid rgba(255, 255, 255, 0.05);
+          border-radius: 20px;
           padding: 12px 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 24px;
-          background: transparent;
+          margin-bottom: 12px;
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
           height: 46px;
           width: 100%;
         }
@@ -233,7 +241,7 @@ export default function Dashboard() {
           height: 0.993px;
           background: rgba(255, 255, 255, 0.15);
           width: 100%;
-          margin: 24px 0;
+          margin: 12px 0 24px 0;
         }
 
         .module-card-dashboard {
@@ -242,7 +250,7 @@ export default function Dashboard() {
           background: rgba(255, 255, 255, 0.05);
           backdrop-filter: blur(10px);
           padding: 24px;
-          margin-bottom: 24px;
+          margin-bottom: 12px;
           position: relative;
           overflow: hidden;
           cursor: pointer;

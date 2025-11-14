@@ -11,10 +11,18 @@ export default function Login1() {
       <BackgroundBlur />
       <div className="login-body">
         <div className="login-logo">
-          <img
-            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' fill='%23000' rx='37'/%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF00FF'/%3E%3Cstop offset='50%25' stop-color='%236521F1'/%3E%3Cstop offset='100%25' stop-color='%230000FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M80 30 C95 35, 110 45, 120 60 C130 75, 130 95, 120 110 C110 125, 95 135, 80 130 C65 135, 50 125, 40 110 C30 95, 30 75, 40 60 C50 45, 65 35, 80 30 Z' fill='url(%23grad)'/%3E%3Cpath d='M80 60 L85 75 L100 75 L88 85 L93 100 L80 90 L67 100 L72 85 L60 75 L75 75 Z' fill='white'/%3E%3C/svg%3E"
-            alt="Aurora Logo"
-          />
+          <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="160" height="160" fill="#000" rx="37"/>
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FF00FF"/>
+                <stop offset="50%" stopColor="#6521F1"/>
+                <stop offset="100%" stopColor="#0000FF"/>
+              </linearGradient>
+            </defs>
+            <path d="M80 30 C95 35, 110 45, 120 60 C130 75, 130 95, 120 110 C110 125, 95 135, 80 130 C65 135, 50 125, 40 110 C30 95, 30 75, 40 60 C50 45, 65 35, 80 30 Z" fill="url(#grad)"/>
+            <path d="M80 60 L85 75 L100 75 L88 85 L93 100 L80 90 L67 100 L72 85 L60 75 L75 75 Z" fill="white"/>
+          </svg>
         </div>
         <div className="login-content">
           <div className="login-header">
@@ -64,13 +72,10 @@ export default function Login1() {
           justify-content: center;
         }
 
-        .login-logo img {
-          width: 148.28%;
-          height: 147.95%;
-          object-fit: cover;
-          position: absolute;
-          left: -24.03%;
-          top: -23.97%;
+        .login-logo svg {
+          width: 100%;
+          height: 100%;
+          display: block;
         }
 
         .login-content {
@@ -98,6 +103,7 @@ export default function Login1() {
           color: white;
           text-align: center;
           margin: 0;
+          line-height: 100%;
         }
 
         .login-subtitle {
@@ -106,6 +112,7 @@ export default function Login1() {
           color: rgba(255, 255, 255, 0.6);
           text-align: center;
           margin: 0;
+          line-height: 100%;
         }
 
         .login-button-wrapper {

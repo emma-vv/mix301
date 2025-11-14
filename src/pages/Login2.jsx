@@ -14,7 +14,7 @@ export default function Login2() {
           <button className="back-button-login" onClick={() => navigate('/')}>
             <i className="fas fa-chevron-left"></i>
           </button>
-          <h1 className="login2-title">NAME</h1>
+          <div style={{ width: '42.66px', height: '42.66px' }}></div>
           <div style={{ width: '42.66px', height: '42.66px' }}></div>
         </div>
 
@@ -29,7 +29,7 @@ export default function Login2() {
             </div>
             <div>
               <h1 className="login2-title-text">Choose Login Method</h1>
-              <p className="login2-subtitle">Select your preffered login option</p>
+              <p className="login2-subtitle">Select your preferred login option</p>
             </div>
           </div>
 
@@ -89,13 +89,6 @@ export default function Login2() {
           text-decoration: none;
         }
 
-        .login2-title {
-          font-size: 20px;
-          font-weight: 600;
-          color: white;
-          text-align: center;
-        }
-
         .login2-content {
           display: flex;
           flex-direction: column;
@@ -117,6 +110,7 @@ export default function Login2() {
           color: white;
           text-align: center;
           margin: 0;
+          line-height: 100%;
         }
 
         .login2-subtitle {
@@ -125,6 +119,7 @@ export default function Login2() {
           color: rgba(255, 255, 255, 0.6);
           text-align: center;
           margin: 0;
+          line-height: 100%;
         }
 
         .login-methods {

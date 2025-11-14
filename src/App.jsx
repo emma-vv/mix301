@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import Rooms from "./pages/Rooms";
 import Mix100 from "./pages/Mix100";
+import Profile from "./pages/Profile";
 import "./index.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/rooms" element={<Rooms />} />
         <Route path="/mix100" element={<Mix100 />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

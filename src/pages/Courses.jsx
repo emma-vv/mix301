@@ -84,7 +84,7 @@ export default function Courses() {
       <BottomNav />
       <style>{`
         .courses-body {
-          padding-bottom: 115px;
+          padding: 60px 24px 115px 24px;
         }
 
         .course-list-item {
@@ -93,7 +93,7 @@ export default function Courses() {
           background: rgba(255, 255, 255, 0.05);
           backdrop-filter: blur(10px);
           padding: 16px 24px;
-          margin-bottom: 16px;
+          margin-bottom: 12px;
           position: relative;
           overflow: hidden;
           cursor: pointer;
