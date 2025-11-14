@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses - Aurora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="components.css" />
+    <style>
+      .courses-body {
+        padding-bottom: 115px;
+      }
+
+      .course-list-item {
+        border: 1.352px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 16px 24px;
+        margin-bottom: 16px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 51px;
+        text-decoration: none;
+      }
+
+      .course-list-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .course-title {
+        font-size: 16px;
+        font-weight: 400;
+        color: white;
+        margin: 0;
+        flex: 1;
+      }
+
+      .course-star-wrapper {
+        width: 19.987px;
+        height: 19.987px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .course-glow {
+        position: absolute;
+        width: 159.981px;
+        height: 159.981px;
+        border-radius: 45372000px;
+        filter: blur(60px);
+        opacity: 0.6;
+        pointer-events: none;
+        left: 182px;
+        top: -57px;
+      }
+
+      .course-glow.mix {
+        background: linear-gradient(to bottom, rgba(193, 241, 90, 0.8), rgba(168, 212, 68, 0.8));
+      }
+
+      .course-glow.tvp {
+        background: linear-gradient(to bottom, rgba(255, 184, 157, 0.8), rgba(245, 160, 132, 0.8));
+      }
+
+      .course-glow.man {
+        background: linear-gradient(to bottom, rgba(107, 219, 219, 0.8), rgba(79, 196, 196, 0.8));
+      }
+
+      .course-glow.jou {
+        background: linear-gradient(to bottom, rgba(107, 216, 227, 0.8), rgba(85, 195, 207, 0.8));
+      }
+
+      .course-glow.ujo {
+        background: linear-gradient(to bottom, rgba(107, 216, 227, 0.8), rgba(85, 195, 207, 0.8));
+      }
+    </style>
+  </head>
+  <body class="courses-body">
+    <div class="background-blur">
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+    </div>
+
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <div style="width: 42.657px; height: 42.657px; opacity: 0"></div>
+        <h1 class="header-title">Media City Bergen</h1>
+        <div class="header-icon"></div>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"></div>
+
+      <!-- Course List Items -->
+      <a href="mix100.html" class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX100</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Star">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+        </div>
+      </a>
+
+      <div class="course-list-item">
+        <div class="course-glow tvp"></div>
+        <p class="course-title">TVP100</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow tvp"></div>
+        <p class="course-title">TVP102</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow tvp"></div>
+        <p class="course-title">TVP104</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow tvp"></div>
+        <p class="course-title">TVP204</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow tvp"></div>
+        <p class="course-title">TVP260</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow tvp"></div>
+        <p class="course-title">TVP261</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow man"></div>
+        <p class="course-title">MAN301</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow man"></div>
+        <p class="course-title">MAN302</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU100</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU102</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU103</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU203</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU204</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU205</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU250</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow jou"></div>
+        <p class="course-title">JOU251</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow ujo"></div>
+        <p class="course-title">UJ0301</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow ujo"></div>
+        <p class="course-title">UJ0304</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow ujo"></div>
+        <p class="course-title">UJ0350</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX114</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX203</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX204</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX250</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX301</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX303</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX333</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="course-list-item">
+        <div class="course-glow mix"></div>
+        <p class="course-title">MIX350</p>
+        <div class="course-star-wrapper">
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-icon" aria-label="Home">
+        <i class="fas fa-house"></i>
+      </a>
+      <a href="courses.html" class="nav-icon nav-icon-active" aria-label="Courses">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Tools">
+        <i class="fas fa-wrench"></i>
+      </a>
+      <a href="index.html" class="nav-icon" aria-label="Rooms">
+        <i class="fas fa-door-open"></i>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Bookings">
+        <i class="fas fa-calendar-check"></i>
+      </a>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+

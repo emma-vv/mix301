@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Login Method - Aurora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="components.css" />
+    <style>
+      .login2-body {
+        min-height: 100vh;
+        padding: 60px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .login2-header {
+        width: 345px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .back-button-login {
+        width: 42.657px;
+        height: 42.657px;
+        border: 1.352px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+      }
+
+      .login2-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+      }
+
+      .login2-content {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        align-items: center;
+        width: 345px;
+      }
+
+      .login2-header-section {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .login2-title-text {
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+        margin: 0;
+      }
+
+      .login2-subtitle {
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+        margin: 0;
+      }
+
+      .login-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 100%;
+      }
+
+      .login-method-card {
+        border: 1.352px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .login-method-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .login-method-icon {
+        width: 47.982px;
+        height: 47.982px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .login-method-icon.microsoft {
+        background: white;
+      }
+
+      .login-method-icon.feide {
+        background: #6521f1;
+        box-shadow: 0px 4px 16px 0px rgba(101, 33, 241, 0.3);
+        border: 1.352px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .login-method-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .login-method-name {
+        font-size: 16px;
+        font-weight: 400;
+        color: white;
+        margin: 0;
+      }
+
+      .login-method-desc {
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+      }
+
+      .login-method-arrow {
+        width: 19.987px;
+        height: 19.987px;
+        flex-shrink: 0;
+      }
+
+      .step-indicators {
+        gap: 12px;
+      }
+
+      .step-indicator {
+        width: 47.982px;
+        height: 47.982px;
+        border-radius: 16px;
+        font-size: 16px;
+        border: 1.352px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .step-indicator.active {
+        background: #6521f1;
+      }
+
+      .step-indicator.completed {
+        background: rgba(101, 33, 241, 0.15);
+      }
+
+      .step-indicator.completed i {
+        font-size: 16px;
+        color: white;
+      }
+
+      .step-connector {
+        width: 47.982px;
+        height: 1.986px;
+        background: rgba(101, 33, 241, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-blur">
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+    </div>
+
+    <div class="login2-body">
+      <div class="login2-header">
+        <a href="login1.html" class="back-button-login">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+        <h1 class="login2-title">NAME</h1>
+        <div style="width: 42.66px; height: 42.66px"></div>
+      </div>
+
+      <div class="login2-content">
+        <div class="login2-header-section">
+          <div class="step-indicators">
+            <div class="step-indicator completed">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-indicator active">2</div>
+          </div>
+          <div>
+            <h1 class="login2-title-text">Choose Login Method</h1>
+            <p class="login2-subtitle">Select your preffered login option</p>
+          </div>
+        </div>
+
+        <div class="login-methods">
+          <div class="login-method-card" onclick="window.location.href='dashboard.html'">
+            <div class="login-method-icon microsoft">
+              <i class="fab fa-microsoft" style="font-size: 24px; color: #6521f1"></i>
+            </div>
+            <div class="login-method-content">
+              <p class="login-method-name">Microsoft</p>
+              <p class="login-method-desc">Login with your Microsoft account</p>
+            </div>
+            <i class="fas fa-chevron-right login-method-arrow" style="color: white"></i>
+          </div>
+
+          <div class="login-method-card" onclick="window.location.href='dashboard.html'">
+            <div class="login-method-icon feide">
+              <i class="fas fa-graduation-cap" style="font-size: 24px; color: white"></i>
+            </div>
+            <div class="login-method-content">
+              <p class="login-method-name">Feide</p>
+              <p class="login-method-desc">Login with your Feide account</p>
+            </div>
+            <i class="fas fa-chevron-right login-method-arrow" style="color: white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

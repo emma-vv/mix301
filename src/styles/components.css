@@ -1,0 +1,547 @@
+/* Component Library Styles */
+
+.component-section {
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.component-example {
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.component-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Information Cards */
+.info-card-button {
+  border: 1.352px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 9.34px 24px;
+  width: 100%;
+  max-width: 345px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.info-card-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.info-card-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-card-expanded {
+  border: 1.352px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 24px;
+  width: 100%;
+  max-width: 345px;
+}
+
+.info-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.info-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
+
+.info-link {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.info-link:hover {
+  opacity: 0.8;
+}
+
+.info-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 51.72px;
+  height: 26.98px;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: 0.3s;
+  border-radius: 26.98px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3.5px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: linear-gradient(to right, #6521f1, #30136e);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* Star Button Component */
+.star-button-component {
+  width: 20px;
+  height: 19.02px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Equipment Search */
+.equipment-search {
+  width: 100%;
+  max-width: 345px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.352px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #6521f1;
+}
+
+.pill-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill-filter {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pill-filter:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.pill-filter.active {
+  background: linear-gradient(
+    to bottom,
+    rgba(193, 241, 90, 0.8),
+    rgba(168, 212, 68, 0.8)
+  );
+  border-color: transparent;
+}
+
+/* Primary Button */
+.primary-button {
+  width: 100%;
+  max-width: 345px;
+  height: 56px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #6521f1, #30136e);
+}
+
+.primary-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 12px rgba(101, 33, 241, 0.4);
+}
+
+.primary-button:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.primary-button.active {
+  background: linear-gradient(to right, #6521f1, #30136e);
+}
+
+/* Step Indicators */
+.step-indicators {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.step-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.step-indicator.active {
+  background: linear-gradient(to right, #6521f1, #30136e);
+  border-color: transparent;
+}
+
+.step-indicator.completed {
+  background: linear-gradient(
+    to bottom,
+    rgba(193, 241, 90, 0.8),
+    rgba(168, 212, 68, 0.8)
+  );
+  border-color: transparent;
+}
+
+.step-indicator.completed i {
+  font-size: 14px;
+}
+
+/* List Items */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 345px;
+  transition: background-color 0.2s ease;
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.list-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.list-item-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
+
+.list-item-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Additional reusable components from mix100.html */
+
+.divider {
+  height: 0.993px;
+  background: rgba(255, 255, 255, 0.15);
+  width: 100%;
+  margin: 0;
+}
+
+.course-info-button {
+  border: 1.352px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 9.34px 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.course-info-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.course-info-button-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chevron-icon {
+  width: 8px;
+  height: 16px;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.activity-card {
+  border: 1.352px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.activity-card-glow {
+  position: absolute;
+  width: 159.981px;
+  height: 159.981px;
+  border-radius: 45372000px;
+  filter: blur(60px);
+  opacity: 0.3;
+  pointer-events: none;
+  left: 1px;
+  top: 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(193, 241, 90, 0.8),
+    rgba(168, 212, 68, 0.8)
+  );
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15.994px;
+}
+
+.activity-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  box-shadow: 0px 0px 10.8px 2px;
+}
+
+.status-upcoming {
+  background: linear-gradient(
+    to bottom,
+    rgba(193, 241, 90, 0.8),
+    rgba(168, 212, 68, 0.8)
+  );
+  box-shadow: 0px 0px 10.8px 2px rgba(193, 241, 90, 0.38);
+}
+
+.status-completed {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 10.8px 2px rgba(255, 255, 255, 0.1);
+}
+
+.activity-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.activity-date-time {
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.seminar-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  text-decoration: none;
+}
+
+.seminar-link i {
+  font-size: 8px;
+  transform: rotate(45deg);
+}
+
+.view-all-button {
+  border: 1.352px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 9.34px 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 20px;
+}
+
+.view-all-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.view-all-button-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
+
+.back-button-visible {
+  opacity: 1 !important;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 20px;
+}

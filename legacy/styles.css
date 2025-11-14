@@ -17,10 +17,10 @@ body {
 .background-blur {
   position: absolute;
   left: 50%;
-  top: calc(50% + 137.04px);
-  transform: translate(-50%, -50%);
+  top: 0;
+  transform: translateX(-50%);
   width: 393px;
-  height: 2047px;
+  height: 852px;
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
@@ -44,31 +44,31 @@ body {
   width: 287.996px;
   height: 287.996px;
   left: -93px;
-  top: 471px;
+  top: 352px;
 }
 .blur-circle:nth-child(3) {
   width: 288px;
   height: 249px;
   left: 162px;
-  top: 441px;
+  top: 3362px;
 }
 .blur-circle:nth-child(4) {
   width: 288px;
   height: 249px;
   left: 187px;
-  top: 679px;
+  top: 790px;
 }
 .blur-circle:nth-child(5) {
   width: 287.996px;
   height: 287.996px;
-  left: -93px;
-  top: 1130px;
+  left: -71px;
+  top: 1945px;
 }
 .blur-circle:nth-child(6) {
   width: 288px;
   height: 249px;
-  left: 162px;
-  top: 1100px;
+  left: 0;
+  top: 1176px;
 }
 .blur-circle:nth-child(7) {
   width: 288px;
@@ -79,8 +79,8 @@ body {
 .blur-circle:nth-child(8) {
   width: 287.996px;
   height: 287.996px;
-  left: -93px;
-  top: 1963px;
+  left: 132px;
+  top: 2275px;
 }
 .blur-circle:nth-child(9) {
   width: 288px;

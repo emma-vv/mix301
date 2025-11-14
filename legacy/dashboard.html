@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Aurora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="components.css" />
+    <style>
+      .dashboard-body {
+        padding: 0 24px 115px 24px;
+      }
+
+      .calendar-card {
+        border: 1.352px solid rgba(255, 255, 255, 0.05);
+        border-radius: 0 0 20px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 60px 24px 24px;
+        margin-bottom: 24px;
+        width: 345px;
+      }
+
+      .calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+
+      .calendar-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+        margin: 0;
+      }
+
+      .calendar-nav {
+        width: 39px;
+        height: 39px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .calendar-profile {
+        width: 39px;
+        height: 39px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .calendar-inner {
+        border: 1.352px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 24px;
+        width: 297px;
+      }
+
+      .calendar-weekdays {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .calendar-weekdays span {
+        width: 19px;
+        text-align: center;
+      }
+
+      .calendar-days {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+      }
+
+      .calendar-days span {
+        text-align: center;
+      }
+
+      .bookings-bar {
+        border: 1px solid white;
+        border-radius: 100px;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        background: transparent;
+        height: 46px;
+        width: 345px;
+      }
+
+      .bookings-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .bookings-icon {
+        width: 19px;
+        height: 19px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .bookings-text {
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+      }
+
+      .bookings-count {
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+      }
+
+      .divider-line {
+        height: 0.993px;
+        background: rgba(255, 255, 255, 0.15);
+        width: 100%;
+        margin: 24px 0;
+        max-width: 345px;
+      }
+
+      .module-card-dashboard {
+        border: 1.352px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 24px;
+        margin-bottom: 24px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: block;
+        width: 345px;
+      }
+
+      .module-card-dashboard:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .module-card-dashboard.tools {
+        min-height: auto;
+      }
+
+      .module-card-dashboard.rooms {
+        min-height: 105px;
+      }
+
+      .module-card-dashboard.courses {
+        min-height: 105px;
+      }
+
+      .module-card-content {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .module-icon-wrapper {
+        width: 50.644px;
+        height: 50.644px;
+        border: 1.352px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .module-icon {
+        width: 23.98px;
+        height: 23.98px;
+        color: white;
+      }
+
+      .module-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .module-name {
+        font-size: 16px;
+        font-weight: 400;
+        color: white;
+        margin: 0;
+      }
+
+      .module-desc {
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+
+      .module-desc span {
+        display: block;
+      }
+
+      .module-arrow {
+        width: 19.987px;
+        height: 19.987px;
+        color: white;
+        flex-shrink: 0;
+      }
+
+      .module-glow {
+        position: absolute;
+        width: 159.981px;
+        height: 159.981px;
+        border-radius: 45372000px;
+        filter: blur(60px);
+        opacity: 0.3;
+        pointer-events: none;
+      }
+
+      .module-glow.tools {
+        background: #f2bab3;
+        left: 197px;
+        top: -2px;
+      }
+
+      .module-glow.rooms {
+        background: #c2ee63;
+        left: 197px;
+        top: -35px;
+      }
+
+      .module-glow.courses {
+        background: #6bd8e3;
+        left: 210px;
+        top: -29px;
+      }
+
+      .dashboard-body .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding-top: 0;
+        max-width: 345px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body class="dashboard-body">
+    <div class="background-blur">
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+    </div>
+
+    <div class="container">
+      <!-- Calendar Card -->
+      <div class="calendar-card">
+        <div class="calendar-header">
+          <h2 class="calendar-title">Oct, Week 42</h2>
+          <div class="calendar-profile">
+            <i class="fas fa-user" style="color: white; font-size: 20px"></i>
+          </div>
+        </div>
+        <div class="calendar-inner">
+          <div class="calendar-weekdays">
+            <span>M</span>
+            <span>T</span>
+            <span>W</span>
+            <span>T</span>
+            <span>F</span>
+            <span>S</span>
+            <span>S</span>
+          </div>
+          <div class="calendar-days">
+            <span>13</span>
+            <span>14</span>
+            <span>15</span>
+            <span>16</span>
+            <span>17</span>
+            <span>18</span>
+            <span>19</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Bookings Bar -->
+      <div class="bookings-bar">
+        <div class="bookings-left">
+          <div class="bookings-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <span class="bookings-text">Active bookings</span>
+        </div>
+        <span class="bookings-count">5</span>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider-line"></div>
+
+      <!-- Module Cards -->
+      <a href="#" class="module-card-dashboard tools" style="text-decoration: none">
+        <div class="module-glow tools"></div>
+        <div class="module-card-content">
+          <div class="module-icon-wrapper">
+            <i class="fas fa-wrench module-icon"></i>
+          </div>
+          <div class="module-text">
+            <p class="module-name">Tools</p>
+            <p class="module-desc">Access your toolkit and resources</p>
+          </div>
+          <i class="fas fa-chevron-right module-arrow"></i>
+        </div>
+      </a>
+
+      <a href="index.html" class="module-card-dashboard rooms" style="text-decoration: none">
+        <div class="module-glow rooms"></div>
+        <div class="module-card-content">
+          <div class="module-icon-wrapper">
+            <i class="fas fa-door-open module-icon"></i>
+          </div>
+          <div class="module-text">
+            <p class="module-name">Rooms</p>
+            <div class="module-desc">
+              <span>Browse available </span>
+              <span>meeting spaces</span>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right module-arrow"></i>
+        </div>
+      </a>
+
+      <a href="courses.html" class="module-card-dashboard courses" style="text-decoration: none">
+        <div class="module-glow courses"></div>
+        <div class="module-card-content">
+          <div class="module-icon-wrapper">
+            <i class="fas fa-graduation-cap module-icon"></i>
+          </div>
+          <div class="module-text">
+            <p class="module-name">Courses</p>
+            <div class="module-desc">
+              <span>Continue your learning </span>
+              <span>journey</span>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right module-arrow"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-icon nav-icon-active" aria-label="Home">
+        <i class="fas fa-house"></i>
+      </a>
+      <a href="courses.html" class="nav-icon" aria-label="Courses">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Tools">
+        <i class="fas fa-wrench"></i>
+      </a>
+      <a href="index.html" class="nav-icon" aria-label="Rooms">
+        <i class="fas fa-door-open"></i>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Bookings">
+        <i class="fas fa-calendar-check"></i>
+      </a>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
