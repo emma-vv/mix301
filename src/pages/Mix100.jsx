@@ -25,9 +25,9 @@ export default function Mix100() {
           <div className="divider"></div>
 
           {/* Course Information Button */}
-          <button className="course-info-button">
+          <button className="info-card-button">
             <i className="fas fa-info-circle" style={{ width: '20px', height: '20px', color: 'white' }}></i>
-            <span className="course-info-button-text">Course information</span>
+            <span className="info-card-text">Course information</span>
             <i className="fas fa-chevron-down chevron-icon"></i>
           </button>
 
@@ -51,7 +51,7 @@ export default function Mix100() {
                 </a>
               </div>
             </div>
-            <button className="view-all-button">
+            <button className="info-card-button">
               <i
                 className="fas fa-chevron-left"
                 style={{
@@ -61,7 +61,7 @@ export default function Mix100() {
                   color: 'white',
                 }}
               ></i>
-              <span className="view-all-button-text">6 upcoming activities</span>
+              <span className="info-card-text">6 upcoming activities</span>
               <i
                 className="fas fa-chevron-right"
                 style={{
@@ -94,7 +94,7 @@ export default function Mix100() {
                 </a>
               </div>
             </div>
-            <button className="view-all-button">
+            <button className="info-card-button">
               <i
                 className="fas fa-chevron-left"
                 style={{
@@ -104,7 +104,7 @@ export default function Mix100() {
                   color: 'white',
                 }}
               ></i>
-              <span className="view-all-button-text">View all past activities</span>
+              <span className="info-card-text">View all past activities</span>
               <i
                 className="fas fa-chevron-right"
                 style={{
@@ -120,7 +120,7 @@ export default function Mix100() {
       </div>
       <style>{`
         .course-detail-body {
-          padding-bottom: 24px;
+          padding: 60px 24px 24px 24px;
         }
       `}</style>
     </>

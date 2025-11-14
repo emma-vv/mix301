@@ -38,7 +38,7 @@ export default function Login1() {
           </div>
           <div className="login-button-wrapper">
             <button
-              className="login-button"
+              className="button-component"
               onClick={() => navigate('/login2')}
             >
               Log In
@@ -122,24 +122,6 @@ export default function Login1() {
           align-items: center;
         }
 
-        .login-button {
-          width: 345px;
-          height: 56px;
-          border: 1.352px solid rgba(255, 255, 255, 0.5);
-          border-radius: 16px;
-          background: transparent;
-          color: white;
-          font-size: 16px;
-          font-weight: 600;
-          font-family: "Roboto", sans-serif;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          box-shadow: 0px 1px 2px 0px inset rgba(255, 255, 255, 0.2);
-        }
-
-        .login-button:hover {
-          background: rgba(255, 255, 255, 0.05);
-        }
 
         .step-indicators {
           display: flex;

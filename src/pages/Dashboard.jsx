@@ -281,20 +281,45 @@ export default function Dashboard() {
         }
 
         .module-icon-wrapper {
-          width: 50.644px;
-          height: 50.644px;
-          border: 1.352px solid rgba(255, 255, 255, 0.1);
-          border-radius: 16px;
+          width: 40px;
+          height: 40px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
         }
 
+        .module-card-dashboard.tools .module-icon-wrapper {
+          background: linear-gradient(to bottom, rgba(242, 186, 179, 0.4), rgba(242, 186, 179, 0.3));
+          border: 1px solid rgba(242, 186, 179, 0.3);
+        }
+
+        .module-card-dashboard.rooms .module-icon-wrapper {
+          background: linear-gradient(to bottom, rgba(194, 238, 99, 0.4), rgba(194, 238, 99, 0.3));
+          border: 1px solid rgba(194, 238, 99, 0.3);
+        }
+
+        .module-card-dashboard.courses .module-icon-wrapper {
+          background: linear-gradient(to bottom, rgba(107, 216, 227, 0.4), rgba(107, 216, 227, 0.3));
+          border: 1px solid rgba(107, 216, 227, 0.3);
+        }
+
         .module-icon {
-          width: 23.98px;
-          height: 23.98px;
+          font-size: 20px;
           color: white;
+        }
+
+        .module-card-dashboard.tools .module-icon {
+          color: rgba(242, 186, 179, 1);
+        }
+
+        .module-card-dashboard.rooms .module-icon {
+          color: rgba(194, 238, 99, 1);
+        }
+
+        .module-card-dashboard.courses .module-icon {
+          color: rgba(107, 216, 227, 1);
         }
 
         .module-text {

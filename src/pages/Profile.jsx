@@ -97,7 +97,7 @@ export default function Profile() {
           </div>
 
           {/* Log Out Button */}
-          <button className="profile-logout-button" onClick={() => navigate('/')}>
+          <button className="button-component" onClick={() => navigate('/')} style={{ marginTop: '29px' }}>
             Log Out
           </button>
         </div>
@@ -256,25 +256,6 @@ export default function Profile() {
           justify-content: flex-end;
         }
 
-        .profile-logout-button {
-          width: 100%;
-          height: 56px;
-          border: 1.352px solid rgba(255, 255, 255, 0.5);
-          border-radius: 16px;
-          background: transparent;
-          color: white;
-          font-size: 16px;
-          font-weight: 600;
-          font-family: "Roboto", sans-serif;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          box-shadow: 0px 1px 2px 0px inset rgba(255, 255, 255, 0.2);
-          margin-top: 29px;
-        }
-
-        .profile-logout-button:hover {
-          background: rgba(255, 255, 255, 0.05);
-        }
       `}</style>
     </>
   )
