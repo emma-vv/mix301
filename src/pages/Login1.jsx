@@ -1,27 +1,39 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import BackgroundBlur from '../components/BackgroundBlur'
-import '../index.css'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import BackgroundBlur from "../components/BackgroundBlur";
+import "../index.css";
 
 export default function Login1() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
       <BackgroundBlur />
       <div className="login-body">
         <div className="login-logo">
-          <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="160" height="160" fill="#000" rx="37"/>
+          <svg
+            width="160"
+            height="160"
+            viewBox="0 0 160 160"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="160" height="160" fill="#000" rx="37" />
             <defs>
               <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FF00FF"/>
-                <stop offset="50%" stopColor="#6521F1"/>
-                <stop offset="100%" stopColor="#0000FF"/>
+                <stop offset="0%" stopColor="#FF00FF" />
+                <stop offset="50%" stopColor="#6521F1" />
+                <stop offset="100%" stopColor="#0000FF" />
               </linearGradient>
             </defs>
-            <path d="M80 30 C95 35, 110 45, 120 60 C130 75, 130 95, 120 110 C110 125, 95 135, 80 130 C65 135, 50 125, 40 110 C30 95, 30 75, 40 60 C50 45, 65 35, 80 30 Z" fill="url(#grad)"/>
-            <path d="M80 60 L85 75 L100 75 L88 85 L93 100 L80 90 L67 100 L72 85 L60 75 L75 75 Z" fill="white"/>
+            <path
+              d="M80 30 C95 35, 110 45, 120 60 C130 75, 130 95, 120 110 C110 125, 95 135, 80 130 C65 135, 50 125, 40 110 C30 95, 30 75, 40 60 C50 45, 65 35, 80 30 Z"
+              fill="url(#grad)"
+            />
+            <path
+              d="M80 60 L85 75 L100 75 L88 85 L93 100 L80 90 L67 100 L72 85 L60 75 L75 75 Z"
+              fill="white"
+            />
           </svg>
         </div>
         <div className="login-content">
@@ -39,7 +51,7 @@ export default function Login1() {
           <div className="login-button-wrapper">
             <button
               className="button-component"
-              onClick={() => navigate('/login2')}
+              onClick={() => navigate("/login2")}
             >
               Log In
             </button>
@@ -160,5 +172,5 @@ export default function Login1() {
         }
       `}</style>
     </>
-  )
+  );
 }
