@@ -10,9 +10,29 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="components.css" />
   </head>
   <body>
+    <div class="background-blur">
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+    </div>
+
     <div class="container">
       <!-- Header -->
       <div class="header">
@@ -22,186 +42,184 @@
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            stroke="white"
+            stroke-width="2"
           >
-            <path
-              d="M15 18L9 12L15 6"
-              stroke="white"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+            <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
         <h1 class="header-title">Media City Bergen</h1>
-        <div class="header-spacer"></div>
+        <div class="header-icon"></div>
       </div>
 
-      <!-- Module Cards -->
+      <!-- Seminar 1 Card -->
       <div class="module-card">
-        <div class="card-content">
-          <div class="card-header">
-            <div class="title-row">
-              <h3 class="card-title">Seminar 1</h3>
-              <button class="star-button starred" aria-label="Toggle star">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 1L12.5 7L19 8L14 12.5L15.5 19L10 15.5L4.5 19L6 12.5L1 8L7.5 7L10 1Z"
-                    fill="white"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="timeline-container">
-            <div class="timeline-grid">
-              <div class="time-marker">08:00</div>
-              <div class="time-marker">09:00</div>
-              <div class="time-marker">10:00</div>
-              <div class="time-marker">11:00</div>
-              <div class="grid-line" style="left: 0px"></div>
-              <div class="grid-line" style="left: 74px"></div>
-              <div class="grid-line" style="left: 148px"></div>
-              <div class="grid-line" style="left: 222px"></div>
-              <div class="grid-line" style="left: 296px"></div>
-              <div
-                class="grid-line horizontal"
-                style="left: 74px; top: 24px; height: 24px"
-              ></div>
-              <div
-                class="grid-line horizontal"
-                style="left: 74px; top: 68px; height: 24px"
-              ></div>
-              <div
-                class="grid-line horizontal"
-                style="left: 222px; top: 68px; height: 24px"
-              ></div>
-              <div
-                class="event-block event-green"
-                style="left: 18px; width: 129px; top: 24px"
-              >
-                <span class="event-label">MIX100</span>
-              </div>
-              <div
-                class="event-block event-purple"
-                style="left: 167px; width: 129px; top: 24px"
-              >
-                <span class="event-label">JOU100</span>
-              </div>
-            </div>
-          </div>
+        <div class="card-glow glow-mix"></div>
+        <div class="card-glow glow-jou"></div>
+        <div class="module-header">
+          <h2 class="module-title">Seminar 1</h2>
+          <button class="star-button star-button-component" aria-label="Star">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="schedule-grid seminar1-grid">
+          <span class="time-marker">08:00</span>
+          <span class="time-marker">09:00</span>
+          <span class="time-marker">10:00</span>
+          <span class="time-marker">11:00</span>
+          <div class="time-line seminar1-line1"></div>
+          <div class="time-line seminar1-line2"></div>
+          <div class="time-line seminar1-line3"></div>
+          <div class="time-line seminar1-line4"></div>
+          <div class="time-line seminar1-line5"></div>
+          <div class="time-line seminar1-line6"></div>
+          <div class="time-line seminar1-line7"></div>
+          <a
+            href="mix100.html"
+            class="event-block event-mix seminar1-mix clickable-event"
+            >MIX100</a
+          >
+          <div class="event-block event-jou seminar1-jou">JOU</div>
         </div>
       </div>
 
+      <!-- Seminar 2 Card -->
       <div class="module-card">
-        <div class="card-content">
-          <div class="card-header">
-            <div class="title-row">
-              <h3 class="card-title">Seminar 2</h3>
-              <button class="star-button starred" aria-label="Toggle star">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 1L12.5 7L19 8L14 12.5L15.5 19L10 15.5L4.5 19L6 12.5L1 8L7.5 7L10 1Z"
-                    fill="white"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="timeline-container">
-            <div class="timeline-grid">
-              <div class="time-marker">08:00</div>
-              <div class="time-marker">09:00</div>
-              <div class="time-marker">10:00</div>
-              <div class="time-marker">11:00</div>
-              <div class="grid-line" style="left: 0px"></div>
-              <div class="grid-line" style="left: 74px"></div>
-              <div class="grid-line" style="left: 148px"></div>
-              <div class="grid-line" style="left: 222px"></div>
-              <div class="grid-line" style="left: 296px"></div>
-              <div
-                class="grid-line horizontal"
-                style="left: 148px; top: 25px; height: 25px"
-              ></div>
-              <div
-                class="event-block event-green"
-                style="left: 82px; width: 129px; top: 25px"
-              >
-                <span class="event-label">MIX203</span>
-              </div>
-            </div>
-          </div>
+        <div class="card-glow glow-sujo"></div>
+        <div class="module-header">
+          <h2 class="module-title">Seminar 2</h2>
+          <button class="star-button star-button-component" aria-label="Star">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="schedule-grid seminar2-grid">
+          <span class="time-marker">08:00</span>
+          <span class="time-marker">09:00</span>
+          <span class="time-marker">10:00</span>
+          <span class="time-marker">11:00</span>
+          <div class="time-line seminar2-line1"></div>
+          <div class="time-line seminar2-line2"></div>
+          <div class="time-line seminar2-line3"></div>
+          <div class="time-line seminar2-line4"></div>
+          <div class="time-line seminar2-line5"></div>
+          <div class="time-line seminar2-line6"></div>
+          <div class="event-block event-sujo seminar2-sujo">SUJO</div>
         </div>
       </div>
 
+      <!-- Datalab 1 (MAN) Card -->
       <div class="module-card">
-        <div class="card-content">
-          <div class="card-header">
-            <div class="title-row">
-              <h3 class="card-title">Datalab 1</h3>
-              <button class="star-button" aria-label="Toggle star">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 1L12.5 7L19 8L14 12.5L15.5 19L10 15.5L4.5 19L6 12.5L1 8L7.5 7L10 1Z"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="timeline-container">
-            <div class="timeline-grid">
-              <div class="time-marker">08:00</div>
-              <div class="time-marker">09:00</div>
-              <div class="time-marker">10:00</div>
-              <div class="time-marker">11:00</div>
-              <div class="grid-line" style="left: 0px"></div>
-              <div class="grid-line" style="left: 74px"></div>
-              <div class="grid-line" style="left: 148px"></div>
-              <div class="grid-line" style="left: 222px"></div>
-              <div class="grid-line" style="left: 296px"></div>
-              <div
-                class="grid-line horizontal"
-                style="left: 148px; top: 25px; height: 25px"
-              ></div>
-              <div
-                class="event-block event-green"
-                style="left: 82px; width: 129px; top: 25px"
-              >
-                <span class="event-label">MIX203</span>
-              </div>
-            </div>
-          </div>
+        <div class="card-glow glow-man"></div>
+        <div class="module-header">
+          <h2 class="module-title">Datalab 1</h2>
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="schedule-grid datalab1-grid">
+          <span class="time-marker">08:00</span>
+          <span class="time-marker">09:00</span>
+          <span class="time-marker">10:00</span>
+          <span class="time-marker">11:00</span>
+          <div class="time-line datalab1-line1"></div>
+          <div class="time-line datalab1-line2"></div>
+          <div class="time-line datalab1-line3"></div>
+          <div class="time-line datalab1-line4"></div>
+          <div class="time-line datalab1-line5"></div>
+          <div class="time-line datalab1-line6"></div>
+          <div class="event-block event-man datalab1-man">MAN</div>
+        </div>
+      </div>
+
+      <!-- Datalab 1 (TVP) Card -->
+      <div class="module-card">
+        <div class="card-glow glow-tvp"></div>
+        <div class="module-header">
+          <h2 class="module-title">Datalab 1</h2>
+          <button class="star-button star-button-component" aria-label="Unstar">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="schedule-grid datalab1-tvp-grid">
+          <span class="time-marker">08:00</span>
+          <span class="time-marker">09:00</span>
+          <span class="time-marker">10:00</span>
+          <span class="time-marker">11:00</span>
+          <div class="time-line datalab1-tvp-line1"></div>
+          <div class="time-line datalab1-tvp-line2"></div>
+          <div class="time-line datalab1-tvp-line3"></div>
+          <div class="time-line datalab1-tvp-line4"></div>
+          <div class="time-line datalab1-tvp-line5"></div>
+          <div class="time-line datalab1-tvp-line6"></div>
+          <div class="event-block event-tvp datalab1-tvp-block">TVP</div>
         </div>
       </div>
     </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="#" class="nav-icon" aria-label="Home">
+        <i class="fas fa-house"></i>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Courses">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Tools">
+        <i class="fas fa-wrench"></i>
+      </a>
+      <a href="index.html" class="nav-icon nav-icon-active" aria-label="Rooms">
+        <i class="fas fa-door-open"></i>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Bookings">
+        <i class="fas fa-calendar-check"></i>
+      </a>
+    </nav>
 
     <script src="script.js"></script>
   </body>

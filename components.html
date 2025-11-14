@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component Library - MIX301</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="components.css" />
+  </head>
+  <body>
+    <div class="background-blur">
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+      <div class="blur-circle"></div>
+    </div>
+
+    <div class="container" style="max-width: 1200px; padding: 60px 24px 120px">
+      <h1
+        style="
+          color: white;
+          font-size: 32px;
+          margin-bottom: 40px;
+          text-align: center;
+        "
+      >
+        Component Library
+      </h1>
+
+      <!-- Information Cards -->
+      <section class="component-section">
+        <h2 class="section-title">Information Cards</h2>
+
+        <!-- Room Information Button -->
+        <div class="component-example">
+          <h3 class="component-name">Room Information (Collapsed)</h3>
+          <button class="info-card-button">
+            <span class="info-card-text">Room information</span>
+            <i class="fas fa-chevron-down chevron-icon"></i>
+          </button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Room Information (Expanded)</h3>
+          <div class="info-card-expanded">
+            <div class="info-card-header">
+              <span class="info-card-text">Room information</span>
+              <i class="fas fa-chevron-up chevron-icon"></i>
+            </div>
+            <div class="info-card-content">
+              <div class="info-item">
+                <span class="info-label">Room type:</span>
+                <span class="info-value">Seminar room</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Room capacity:</span>
+                <span class="info-value">20 spots</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Location:</span>
+                <a href="#" class="info-link">View on Mazemap</a>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Tools:</span>
+                <span class="info-value">Laptop connection, Projector</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Information Button -->
+        <div class="component-example">
+          <h3 class="component-name">Course Information (Collapsed)</h3>
+          <button class="info-card-button">
+            <i
+              class="fas fa-info-circle"
+              style="width: 20px; height: 20px; color: white"
+            ></i>
+            <span class="info-card-text">Course information</span>
+            <i class="fas fa-chevron-down chevron-icon"></i>
+          </button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Course Information (Expanded)</h3>
+          <div class="info-card-expanded">
+            <div class="info-card-header">
+              <i
+                class="fas fa-info-circle"
+                style="width: 20px; height: 20px; color: white"
+              ></i>
+              <span class="info-card-text">Course information</span>
+              <i class="fas fa-chevron-up chevron-icon"></i>
+            </div>
+            <div class="info-card-content">
+              <div class="info-item">
+                <span class="info-label">Exam:</span>
+                <span class="info-value">Assignment due</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Date:</span>
+                <span class="info-value">Tue Dec 02</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Links:</span>
+                <div class="info-links">
+                  <a href="#" class="info-link">MittUiB page</a>
+                  <a href="#" class="info-link">UiB.no description</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Toggle & Star Components -->
+      <section class="component-section">
+        <h2 class="section-title">Toggle & Star</h2>
+
+        <div class="component-example">
+          <h3 class="component-name">Toggle Switch (On)</h3>
+          <label class="toggle-switch">
+            <input type="checkbox" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Toggle Switch (Off)</h3>
+          <label class="toggle-switch">
+            <input type="checkbox" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Star (Starred)</h3>
+          <button class="star-button-component">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Star (Unstarred)</h3>
+          <button class="star-button-component">
+            <svg
+              class="star-icon"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              opacity="0.3"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Equipment Search -->
+      <section class="component-section">
+        <h2 class="section-title">Equipment Search</h2>
+
+        <div class="component-example">
+          <h3 class="component-name">Equipment Search (Checkbox Filter)</h3>
+          <div class="equipment-search">
+            <div class="search-bar">
+              <i
+                class="fas fa-search"
+                style="color: white; margin-right: 10px"
+              ></i>
+              <input
+                type="text"
+                placeholder="Search for equipment..."
+                class="search-input"
+              />
+              <i
+                class="fas fa-filter"
+                style="color: white; cursor: pointer"
+              ></i>
+            </div>
+            <div class="checkbox-grid">
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>Camera</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" checked />
+                  <span>Light</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" checked />
+                  <span>Sound</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>Cable</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>Mount</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>Video</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>Electricity</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>Media</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>Key</span>
+                </label>
+              </div>
+              <div class="checkbox-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" />
+                  <span>IT</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Equipment Search (Pill Filter)</h3>
+          <div class="equipment-search">
+            <div class="search-bar">
+              <i
+                class="fas fa-search"
+                style="color: white; margin-right: 10px"
+              ></i>
+              <input
+                type="text"
+                placeholder="Search for equipment..."
+                class="search-input"
+              />
+              <i
+                class="fas fa-filter"
+                style="color: white; cursor: pointer"
+              ></i>
+            </div>
+            <div class="pill-filters">
+              <button class="pill-filter active">Video</button>
+              <button class="pill-filter">Light</button>
+              <button class="pill-filter">Sound</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Activity Cards -->
+      <section class="component-section">
+        <h2 class="section-title">Activity Cards</h2>
+
+        <div class="component-example">
+          <h3 class="component-name">Activity Card (Upcoming)</h3>
+          <div class="activity-card">
+            <div class="activity-card-glow"></div>
+            <div class="activity-header">
+              <h3 class="activity-title">Workshop</h3>
+              <div class="status-badge status-upcoming">Upcoming</div>
+            </div>
+            <div class="activity-details">
+              <div class="activity-date-time">
+                <span>Tue Oct 14</span>
+                <span>08:15 - 10:00</span>
+              </div>
+              <a href="#" class="seminar-link">
+                <span>Seminar 1</span>
+                <i class="fas fa-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Activity Card (Completed)</h3>
+          <div class="activity-card">
+            <div class="activity-card-glow"></div>
+            <div class="activity-header">
+              <h3 class="activity-title">Workshop</h3>
+              <div class="status-badge status-completed">Completed</div>
+            </div>
+            <div class="activity-details">
+              <div class="activity-date-time">
+                <span>Tue Aug 12</span>
+                <span>08:15 - 10:00</span>
+              </div>
+              <a href="#" class="seminar-link">
+                <span>Seminar 1</span>
+                <i class="fas fa-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <section class="component-section">
+        <h2 class="section-title">Buttons</h2>
+
+        <div class="component-example">
+          <h3 class="component-name">Primary Button (Active)</h3>
+          <button class="primary-button active">Next</button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Primary Button (Disabled)</h3>
+          <button class="primary-button" disabled>Next</button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">View All Button</h3>
+          <button class="view-all-button">
+            <i
+              class="fas fa-chevron-left"
+              style="
+                transform: rotate(270deg) scaleY(-1);
+                width: 8px;
+                height: 16px;
+                color: white;
+              "
+            ></i>
+            <span class="view-all-button-text">6 upcoming activities</span>
+            <i
+              class="fas fa-chevron-right"
+              style="
+                transform: rotate(270deg);
+                width: 8px;
+                height: 16px;
+                color: white;
+              "
+            ></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Step Indicators -->
+      <section class="component-section">
+        <h2 class="section-title">Step Indicators</h2>
+
+        <div class="component-example">
+          <h3 class="component-name">Step Indicators</h3>
+          <div class="step-indicators">
+            <div class="step-indicator active">1</div>
+            <div class="step-indicator active">2</div>
+          </div>
+          <div class="step-indicators" style="margin-top: 20px">
+            <div class="step-indicator completed">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="step-indicator active">2</div>
+          </div>
+          <div class="step-indicators" style="margin-top: 20px">
+            <div class="step-indicator active">1</div>
+            <div class="step-indicator active">2</div>
+            <div class="step-indicator active">3</div>
+          </div>
+          <div class="step-indicators" style="margin-top: 20px">
+            <div class="step-indicator completed">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="step-indicator completed">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="step-indicator active">3</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigation Bars -->
+      <section class="component-section">
+        <h2 class="section-title">Navigation Bars</h2>
+
+        <div class="component-example">
+          <h3 class="component-name">Bottom Navigation (Dashboard)</h3>
+          <nav class="bottom-nav">
+            <div class="nav-icon" aria-label="Home">
+              <i class="fas fa-house"></i>
+            </div>
+            <div class="nav-icon" aria-label="Courses">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="nav-icon" aria-label="Tools">
+              <i class="fas fa-wrench"></i>
+            </div>
+            <div class="nav-icon" aria-label="Rooms">
+              <i class="fas fa-door-open"></i>
+            </div>
+            <div class="nav-icon" aria-label="Bookings">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+          </nav>
+        </div>
+      </section>
+
+      <!-- List Items -->
+      <section class="component-section">
+        <h2 class="section-title">List Items</h2>
+
+        <div class="component-example">
+          <h3 class="component-name">Tools List Item</h3>
+          <div class="list-item">
+            <i
+              class="fas fa-camera"
+              style="width: 24px; height: 24px; color: white"
+            ></i>
+            <div class="list-item-content">
+              <div class="list-item-title">Canon EOS 2000D</div>
+              <div class="list-item-subtitle">Oct 14 - Oct 16</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-name">Room List Item</h3>
+          <div class="list-item">
+            <i
+              class="fas fa-door-open"
+              style="width: 24px; height: 24px; color: white"
+            ></i>
+            <div class="list-item-content">
+              <div class="list-item-title">Seminar 1</div>
+              <div class="list-item-subtitle">16:00 - 17:00 - Tomorrow</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
