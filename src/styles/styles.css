@@ -8,28 +8,31 @@ body {
   font-family: "Roboto", sans-serif;
   background: linear-gradient(to left, #280d5f, #30136e 40%, #280d5f);
   background-attachment: fixed;
+  background-size: 100% 100%;
   min-height: 100vh;
   padding: 0;
   margin: 0;
   position: relative;
   overflow-x: hidden;
+  width: 100vw;
 }
 
 #root {
   min-height: 100vh;
   position: relative;
+  /* Ensure root doesn't create transform context that affects fixed children */
+  transform: none;
 }
 
 /* Background blur effects */
 .background-blur {
-  position: absolute;
-  left: 50%;
+  position: fixed;
+  left: 0;
   top: 0;
-  transform: translateX(-50%);
-  width: 393px;
-  min-height: 852px;
+  width: 100vw;
+  min-height: 100vh;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   pointer-events: none;
   z-index: 0;
 }
@@ -40,67 +43,69 @@ body {
   filter: blur(120px);
   opacity: 0.484;
   border-radius: 45372000px;
+  /* Position relative to center of viewport (393px centered) */
+  left: calc(50% - 196.5px);
 }
 
 .blur-circle:nth-child(1) {
   width: 288px;
   height: 249px;
-  left: 187px;
+  left: calc(50% - 196.5px + 187px);
   top: 20px;
 }
 .blur-circle:nth-child(2) {
   width: 287.996px;
   height: 287.996px;
-  left: -93px;
+  left: calc(50% - 196.5px - 93px);
   top: 352px;
 }
 .blur-circle:nth-child(3) {
   width: 288px;
   height: 249px;
-  left: 162px;
+  left: calc(50% - 196.5px + 162px);
   top: 3362px;
 }
 .blur-circle:nth-child(4) {
   width: 288px;
   height: 249px;
-  left: 187px;
+  left: calc(50% - 196.5px + 187px);
   top: 790px;
 }
 .blur-circle:nth-child(5) {
   width: 287.996px;
   height: 287.996px;
-  left: -71px;
+  left: calc(50% - 196.5px - 71px);
   top: 1945px;
 }
 .blur-circle:nth-child(6) {
   width: 288px;
   height: 249px;
-  left: 0;
+  left: calc(50% - 196.5px + 0px);
   top: 1176px;
 }
 .blur-circle:nth-child(7) {
   width: 288px;
   height: 249px;
-  left: 187px;
+  left: calc(50% - 196.5px + 187px);
   top: 1512px;
 }
 .blur-circle:nth-child(8) {
   width: 287.996px;
   height: 287.996px;
-  left: 132px;
+  left: calc(50% - 196.5px + 132px);
   top: 2275px;
 }
 .blur-circle:nth-child(9) {
   width: 288px;
   height: 249px;
-  left: 162px;
+  left: calc(50% - 196.5px + 162px);
   top: 1933px;
 }
 
 .blur-circle-extra {
   width: 288px;
   height: 249px;
-  left: 162px;
+  left: calc(50% - 196.5px + 162px);
 }
 
 .container {
@@ -400,7 +405,15 @@ body {
   align-items: center;
   justify-content: space-around;
   padding: 11.65px 37.65px;
-  z-index: 100;
+  z-index: 10000;
+  margin: 0;
+  box-sizing: border-box;
+  /* Prevent glitches - use GPU acceleration */
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Ensure it's always relative to viewport, not parent */
+  contain: layout style paint;
 }
 
 .nav-icon {

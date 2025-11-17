@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
-import BottomNav from "../components/BottomNav";
 import "../index.css";
 
 const toolData = {
   "canon-eos-2000d": {
     name: "Canon EOS 2000D",
     imageUrl: "",
-    notes: "Includes: DSLR camera, 2 lenses (24-70mm, 50mm), tripod, memory cards, battery pack.",
+    notes:
+      "Includes: DSLR camera, 2 lenses (24-70mm, 50mm), tripod, memory cards, battery pack.",
   },
   "godox-ledp260c": {
     name: "Godox LEDP260C",
     imageUrl: "",
-    notes: "Includes: LED light panel, power adapter, carrying case, diffuser panel.",
+    notes:
+      "Includes: LED light panel, power adapter, carrying case, diffuser panel.",
   },
   "rode-videomic-rycote": {
     name: "Rode VideoMic Rycote",
@@ -23,7 +24,8 @@ const toolData = {
   "gopro-hero-11-black-mini": {
     name: "GoPro Hero 11 Black Mini",
     imageUrl: "",
-    notes: "Includes: Action camera, waterproof housing, mounting accessories, USB-C cable.",
+    notes:
+      "Includes: Action camera, waterproof housing, mounting accessories, USB-C cable.",
   },
   "joby-gorillapod-500": {
     name: "Joby Gorillapod 500 Action mount",
@@ -38,7 +40,8 @@ const toolData = {
   "sony-a7-iii": {
     name: "Sony A7 III",
     imageUrl: "",
-    notes: "Includes: Mirrorless camera body, battery, charger, USB cable, strap.",
+    notes:
+      "Includes: Mirrorless camera body, battery, charger, USB cable, strap.",
   },
   "aputure-300d": {
     name: "Aputure 300D",
@@ -53,12 +56,14 @@ const toolData = {
   "dji-mini-3-pro": {
     name: "DJI Mini 3 Pro",
     imageUrl: "",
-    notes: "Includes: Drone, remote controller, batteries, charger, propellers, carrying case.",
+    notes:
+      "Includes: Drone, remote controller, batteries, charger, propellers, carrying case.",
   },
   "manfrotto-tripod": {
     name: "Manfrotto Tripod",
     imageUrl: "",
-    notes: "Includes: Carbon fiber tripod, ball head, quick release plate, carrying bag.",
+    notes:
+      "Includes: Carbon fiber tripod, ball head, quick release plate, carrying bag.",
   },
   "xlr-cable-5m": {
     name: "XLR Cable 5m",
@@ -68,17 +73,20 @@ const toolData = {
   "canon-24-70mm-lens": {
     name: "Canon 24-70mm Lens",
     imageUrl: "",
-    notes: "Includes: EF 24-70mm f/2.8L lens, lens cap, lens hood, carrying case.",
+    notes:
+      "Includes: EF 24-70mm f/2.8L lens, lens cap, lens hood, carrying case.",
   },
   "neewer-led-panel": {
     name: "Neewer LED Panel",
     imageUrl: "",
-    notes: "Includes: LED light panel, dimmer control, power adapter, color filters.",
+    notes:
+      "Includes: LED light panel, dimmer control, power adapter, color filters.",
   },
   "zoom-h6-recorder": {
     name: "Zoom H6 Recorder",
     imageUrl: "",
-    notes: "Includes: Portable audio recorder, XLR inputs, SD card, USB cable, windscreen.",
+    notes:
+      "Includes: Portable audio recorder, XLR inputs, SD card, USB cable, windscreen.",
   },
   "usb-c-cable-3m": {
     name: "USB-C Cable 3m",
@@ -95,7 +103,12 @@ export default function ToolDetail() {
   const totalImages = 5; // Based on the carousel dots in the design
 
   const tool = toolData[toolId] || {
-    name: toolId ? toolId.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") : "Tool",
+    name: toolId
+      ? toolId
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      : "Tool",
     imageUrl: "",
     notes: "No additional information available for this tool.",
   };
@@ -248,7 +261,7 @@ export default function ToolDetail() {
           </div>
 
           {/* Book Button */}
-          <button 
+          <button
             className="button-component tool-book-button"
             onClick={() => navigate(`/tools/${toolId}/booking-guide`)}
           >
@@ -299,7 +312,6 @@ export default function ToolDetail() {
         </div>
       </div>
 
-      <BottomNav />
       <style>{`
         .tool-detail-body {
           padding: 0;

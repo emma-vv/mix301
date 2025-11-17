@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
-import BottomNav from "../components/BottomNav";
 import { toastManager } from "../utils/toast";
 import "../index.css";
 
@@ -278,7 +277,6 @@ export default function ToolBookingConfirmation() {
           </button>
         </div>
       </div>
-      <BottomNav />
       <style>{`
         .tool-booking-confirmation-body {
           padding: 0;

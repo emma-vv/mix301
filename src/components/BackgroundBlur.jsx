@@ -56,12 +56,12 @@ export default function BackgroundBlur() {
       {/* Additional blur circles for longer content */}
       {[...Array(6)].map((_, i) => {
         const positions = [
-          { left: '187px', top: '3000px' },
-          { left: '-71px', top: '3800px' },
-          { left: '162px', top: '4600px' },
-          { left: '0px', top: '5400px' },
-          { left: '132px', top: '6200px' },
-          { left: '187px', top: '7000px' },
+          { left: 'calc(50% - 196.5px + 187px)', top: '3000px' },
+          { left: 'calc(50% - 196.5px - 71px)', top: '3800px' },
+          { left: 'calc(50% - 196.5px + 162px)', top: '4600px' },
+          { left: 'calc(50% - 196.5px + 0px)', top: '5400px' },
+          { left: 'calc(50% - 196.5px + 132px)', top: '6200px' },
+          { left: 'calc(50% - 196.5px + 187px)', top: '7000px' },
         ]
         return (
           <div 

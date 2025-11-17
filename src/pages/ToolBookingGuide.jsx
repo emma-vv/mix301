@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
-import BottomNav from "../components/BottomNav";
 import "../index.css";
 
 export default function ToolBookingGuide() {
@@ -113,7 +112,6 @@ export default function ToolBookingGuide() {
           </button>
         </div>
       </div>
-      <BottomNav />
       <style>{`
         .tool-booking-guide-body {
           padding: 0;

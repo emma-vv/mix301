@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
-import BottomNav from "../components/BottomNav";
 import { toastManager } from "../utils/toast";
 import { getAppDate, isAppDate } from "../utils/appDate";
 import "../index.css";
@@ -480,7 +479,6 @@ export default function ToolBookingCalendar() {
           </button>
         </div>
       </div>
-      <BottomNav />
       <style>{`
         .tool-booking-calendar-body {
           padding: 0;

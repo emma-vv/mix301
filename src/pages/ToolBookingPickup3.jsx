@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
-import BottomNav from "../components/BottomNav";
 import "../index.css";
 
 export default function ToolBookingPickup3() {
@@ -220,7 +219,6 @@ export default function ToolBookingPickup3() {
           </div>
         </div>
       </div>
-      <BottomNav />
       <style>{`
         .tool-booking-pickup3-body {
           padding: 0;

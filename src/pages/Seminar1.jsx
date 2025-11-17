@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
-import BottomNav from "../components/BottomNav";
 import StarButton from "../components/StarButton";
 import "../index.css";
 
@@ -351,7 +350,6 @@ export default function Seminar1() {
           </div>
         </div>
       </div>
-      <BottomNav />
       <style>{`
         .seminar1-body {
           padding: 0;

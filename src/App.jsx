@@ -23,7 +23,9 @@ import "./index.css";
 
 function App() {
   return (
-    <div style={{ minHeight: "100vh", position: "relative" }}>
+    <div
+      style={{ minHeight: "100vh", position: "relative", transform: "none" }}
+    >
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Login1 />} />

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
-import BottomNav from "../components/BottomNav";
 import { toastManager } from "../utils/toast";
 import "../index.css";
 
@@ -335,7 +334,6 @@ export default function BookingDetail() {
           </button>
         </div>
       </div>
-      <BottomNav />
 
       {/* Cancel Booking Confirmation Modal */}
       {isCancelModalOpen && (
