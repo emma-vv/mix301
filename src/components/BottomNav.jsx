@@ -38,7 +38,7 @@ export default function BottomNav() {
         <i className="fas fa-door-open"></i>
       </Link>
       <Link
-        to="#"
+        to="/bookings"
         className={`nav-icon ${isActive('/bookings') ? 'nav-icon-active' : ''}`}
         aria-label="Bookings"
       >

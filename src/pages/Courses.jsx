@@ -37,9 +37,23 @@ const courses = [
 ];
 
 export default function Courses() {
-  const [courseStars, setCourseStars] = useState(
-    Object.fromEntries(courses.map((c) => [c.id, c.starred]))
-  );
+  // Load favorites from localStorage on mount
+  const loadFavorites = () => {
+    try {
+      const saved = localStorage.getItem('favorites')
+      if (saved) {
+        const favorites = JSON.parse(saved)
+        return Object.fromEntries(
+          courses.map((c) => [c.id, favorites[c.id] || c.starred])
+        )
+      }
+    } catch (e) {
+      console.error('Error loading favorites:', e)
+    }
+    return Object.fromEntries(courses.map((c) => [c.id, c.starred]))
+  }
+
+  const [courseStars, setCourseStars] = useState(loadFavorites)
 
   const handleStarToggle = (courseId, starred) => {
     setCourseStars((prev) => ({ ...prev, [courseId]: starred }));
@@ -73,6 +87,7 @@ export default function Courses() {
                 onClick={(e) => e.preventDefault()}
               >
                 <StarButton
+                  itemId={course.id}
                   initialStarred={courseStars[course.id]}
                   onToggle={(starred) => handleStarToggle(course.id, starred)}
                 />

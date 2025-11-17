@@ -7,13 +7,11 @@ export default function BackgroundBlur() {
   useEffect(() => {
     const updateHeight = () => {
       if (blurRef.current) {
-        const documentHeight = Math.max(
-          document.body.scrollHeight,
-          document.body.offsetHeight,
-          document.documentElement.clientHeight,
-          document.documentElement.scrollHeight,
-          document.documentElement.offsetHeight
-        )
+        // Get the actual content height more accurately
+        const bodyHeight = document.body.scrollHeight
+        const htmlHeight = document.documentElement.scrollHeight
+        // Use the larger of the two, but ensure we're getting the actual content height
+        const documentHeight = Math.max(bodyHeight, htmlHeight, document.documentElement.offsetHeight)
         blurRef.current.style.height = `${documentHeight}px`
       }
     }
@@ -23,12 +21,24 @@ export default function BackgroundBlur() {
     window.addEventListener('scroll', updateHeight)
     
     // Use MutationObserver to watch for content changes
-    const observer = new MutationObserver(updateHeight)
+    const observer = new MutationObserver(() => {
+      // Use requestAnimationFrame to batch updates
+      requestAnimationFrame(updateHeight)
+    })
     observer.observe(document.body, {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['style', 'class']
+      attributeFilter: ['style', 'class'],
+      characterData: false
+    })
+    
+    // Also observe the document element for height changes
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['style', 'class'],
+      childList: true,
+      subtree: true
     })
 
     return () => {

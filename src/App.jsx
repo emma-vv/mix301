@@ -9,6 +9,11 @@ import Tools from "./pages/Tools";
 import ToolDetail from "./pages/ToolDetail";
 import ToolBookingGuide from "./pages/ToolBookingGuide";
 import ToolBookingCalendar from "./pages/ToolBookingCalendar";
+import ToolBookingPickup from "./pages/ToolBookingPickup";
+import ToolBookingPickup2 from "./pages/ToolBookingPickup2";
+import ToolBookingPickup3 from "./pages/ToolBookingPickup3";
+import ToolBookingConfirmation from "./pages/ToolBookingConfirmation";
+import MyBookings from "./pages/MyBookings";
 import Mix100 from "./pages/Mix100";
 import Profile from "./pages/Profile";
 import "./index.css";
@@ -32,6 +37,23 @@ function App() {
           path="/tools/:toolId/booking-calendar"
           element={<ToolBookingCalendar />}
         />
+        <Route
+          path="/tools/:toolId/booking-pickup"
+          element={<ToolBookingPickup />}
+        />
+        <Route
+          path="/tools/:toolId/booking-pickup-2"
+          element={<ToolBookingPickup2 />}
+        />
+        <Route
+          path="/tools/:toolId/booking-pickup-3"
+          element={<ToolBookingPickup3 />}
+        />
+        <Route
+          path="/tools/:toolId/booking-confirmation"
+          element={<ToolBookingConfirmation />}
+        />
+        <Route path="/bookings" element={<MyBookings />} />
         <Route path="/mix100" element={<Mix100 />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

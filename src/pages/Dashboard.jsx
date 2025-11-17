@@ -41,7 +41,7 @@ export default function Dashboard() {
           </div>
 
           {/* Active Bookings Bar */}
-          <div className="bookings-bar">
+          <Link to="/bookings" className="bookings-bar" style={{ textDecoration: "none", color: "inherit" }}>
             <div className="bookings-left">
               <div className="bookings-icon">
                 <i className="fas fa-calendar-check"></i>
@@ -49,7 +49,7 @@ export default function Dashboard() {
               <span className="bookings-text">Active bookings</span>
             </div>
             <span className="bookings-count">5</span>
-          </div>
+          </Link>
 
           {/* Divider */}
           <div className="divider-line"></div>

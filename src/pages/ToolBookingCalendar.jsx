@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
 import "../index.css";
@@ -13,9 +13,85 @@ const toolData = {
 export default function ToolBookingCalendar() {
   const navigate = useNavigate();
   const { toolId } = useParams();
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDates, setSelectedDates] = useState(new Set());
+  const location = useLocation();
+  
+  // Check if this is an edit booking (from edit button) or a new booking
+  const isEditBooking = new URLSearchParams(location.search).get('edit') === 'true';
+  
+  // Get storage key for this tool (memoized to avoid unnecessary re-renders)
+  const storageKey = useMemo(() => `booking_${toolId}_selectedDates`, [toolId]);
+  const currentDateKey = useMemo(() => `booking_${toolId}_currentDate`, [toolId]);
+  
+  // Default to October 14th of current year
+  const getDefaultDate = () => {
+    const defaultDate = new Date();
+    defaultDate.setMonth(9); // October (0-indexed)
+    defaultDate.setDate(14);
+    return defaultDate;
+  };
+  
+  const [currentDate, setCurrentDate] = useState(() => {
+    const key = `booking_${toolId}_currentDate`;
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        const date = new Date(saved);
+        if (!isNaN(date.getTime())) {
+          return date;
+        }
+      }
+    } catch (e) {
+      console.error("Error loading saved current date:", e);
+    }
+    return getDefaultDate();
+  });
+  
+  const [selectedDates, setSelectedDates] = useState(() => {
+    const key = `booking_${toolId}_selectedDates`;
+    
+    // If this is a new booking (not edit), clear saved dates
+    if (!isEditBooking) {
+      localStorage.removeItem(key);
+      return new Set();
+    }
+    
+    // If editing, load saved dates
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        const dateArray = JSON.parse(saved);
+        return new Set(dateArray);
+      }
+    } catch (e) {
+      console.error("Error loading saved dates:", e);
+    }
+    return new Set();
+  });
+  
+  // Clear dates on mount if this is a new booking
+  useEffect(() => {
+    if (!isEditBooking) {
+      setSelectedDates(new Set());
+      localStorage.removeItem(storageKey);
+    }
+  }, [isEditBooking, storageKey]);
+  
   const [startDate, setStartDate] = useState(null);
+  
+  // Save selected dates to localStorage whenever they change
+  useEffect(() => {
+    if (selectedDates.size > 0) {
+      const dateArray = Array.from(selectedDates);
+      localStorage.setItem(storageKey, JSON.stringify(dateArray));
+    } else {
+      localStorage.removeItem(storageKey);
+    }
+  }, [selectedDates, storageKey]);
+  
+  // Save current date to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(currentDateKey, currentDate.toISOString());
+  }, [currentDate, currentDateKey]);
 
   const tool = toolData[toolId] || toolData["canon-eos-2000d"];
 
@@ -389,6 +465,11 @@ export default function ToolBookingCalendar() {
           <button
             className={`button-component ${!hasSelection ? "non-active" : ""}`}
             disabled={!hasSelection}
+            onClick={() => {
+              if (hasSelection) {
+                navigate(`/tools/${toolId}/booking-pickup`);
+              }
+            }}
           >
             Next
           </button>

@@ -5,30 +5,47 @@ import BottomNav from '../components/BottomNav'
 import StarButton from '../components/StarButton'
 import '../index.css'
 
+const defaultStarred = {
+  seminar1: true,
+  seminar2: true,
+  datalab1: false,
+  datalab2: false,
+  researchlab: false,
+  editorialroom: false,
+  meetingroom1: false,
+  meetingroom2: true,
+  sujoseminar: false,
+  framsyn: false,
+  grouproom1: false,
+  grouproom2: false,
+  studioinfomedia: false,
+  soundstudio: false,
+  sound1: false,
+  sound2: false,
+  post1: false,
+  post2: false,
+  post3: false,
+  post4: false,
+  workshop: false,
+}
+
 export default function Rooms() {
-  const [starred, setStarred] = useState({
-    seminar1: true,
-    seminar2: true,
-    datalab1: false,
-    datalab2: false,
-    researchlab: false,
-    editorialroom: false,
-    meetingroom1: false,
-    meetingroom2: true,
-    sujoseminar: false,
-    framsyn: false,
-    grouproom1: false,
-    grouproom2: false,
-    studioinfomedia: false,
-    soundstudio: false,
-    sound1: false,
-    sound2: false,
-    post1: false,
-    post2: false,
-    post3: false,
-    post4: false,
-    workshop: false,
-  })
+  // Load favorites from localStorage on mount
+  const loadFavorites = () => {
+    try {
+      const saved = localStorage.getItem('favorites')
+      if (saved) {
+        const favorites = JSON.parse(saved)
+        // Merge with defaults, prioritizing saved favorites
+        return { ...defaultStarred, ...favorites }
+      }
+    } catch (e) {
+      console.error('Error loading favorites:', e)
+    }
+    return defaultStarred
+  }
+
+  const [starred, setStarred] = useState(loadFavorites)
 
   return (
     <>
@@ -54,6 +71,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Seminar 1</h2>
               <StarButton
+                itemId="seminar1"
                 initialStarred={starred.seminar1}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, seminar1: starred }))}
               />
@@ -89,6 +107,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Seminar 2</h2>
               <StarButton
+                itemId="seminar2"
                 initialStarred={starred.seminar2}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, seminar2: starred }))}
               />
@@ -117,6 +136,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Data Lab 1</h2>
               <StarButton
+                itemId="datalab1"
                 initialStarred={starred.datalab1}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, datalab1: starred }))}
               />
@@ -148,6 +168,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Data Lab 2</h2>
               <StarButton
+                itemId="datalab2"
                 initialStarred={starred.datalab2}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, datalab2: starred }))}
               />
@@ -175,6 +196,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Research Lab</h2>
               <StarButton
+                itemId="researchlab"
                 initialStarred={starred.researchlab}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, researchlab: starred }))}
               />
@@ -203,6 +225,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Editorial Room</h2>
               <StarButton
+                itemId="editorialroom"
                 initialStarred={starred.editorialroom}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, editorialroom: starred }))}
               />
@@ -231,6 +254,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Meeting Room 1</h2>
               <StarButton
+                itemId="meetingroom1"
                 initialStarred={starred.meetingroom1}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, meetingroom1: starred }))}
               />
@@ -259,6 +283,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Meeting Room 2</h2>
               <StarButton
+                itemId="meetingroom2"
                 initialStarred={starred.meetingroom2}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, meetingroom2: starred }))}
               />
@@ -290,6 +315,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">SUJO Seminar Room</h2>
               <StarButton
+                itemId="sujoseminar"
                 initialStarred={starred.sujoseminar}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, sujoseminar: starred }))}
               />
@@ -313,6 +339,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Framsyn</h2>
               <StarButton
+                itemId="framsyn"
                 initialStarred={starred.framsyn}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, framsyn: starred }))}
               />
@@ -339,6 +366,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Group Room 1</h2>
               <StarButton
+                itemId="grouproom1"
                 initialStarred={starred.grouproom1}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, grouproom1: starred }))}
               />
@@ -362,6 +390,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Group Room 2</h2>
               <StarButton
+                itemId="grouproom2"
                 initialStarred={starred.grouproom2}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, grouproom2: starred }))}
               />
@@ -389,6 +418,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Studio Infomedia</h2>
               <StarButton
+                itemId="studioinfomedia"
                 initialStarred={starred.studioinfomedia}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, studioinfomedia: starred }))}
               />
@@ -416,6 +446,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Sound Studio</h2>
               <StarButton
+                itemId="soundstudio"
                 initialStarred={starred.soundstudio}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, soundstudio: starred }))}
               />
@@ -444,6 +475,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Sound 1</h2>
               <StarButton
+                itemId="sound1"
                 initialStarred={starred.sound1}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, sound1: starred }))}
               />
@@ -474,6 +506,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Sound 2</h2>
               <StarButton
+                itemId="sound2"
                 initialStarred={starred.sound2}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, sound2: starred }))}
               />
@@ -504,6 +537,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Post 1</h2>
               <StarButton
+                itemId="post1"
                 initialStarred={starred.post1}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, post1: starred }))}
               />
@@ -534,6 +568,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Post 2</h2>
               <StarButton
+                itemId="post2"
                 initialStarred={starred.post2}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, post2: starred }))}
               />
@@ -564,6 +599,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Post 3</h2>
               <StarButton
+                itemId="post3"
                 initialStarred={starred.post3}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, post3: starred }))}
               />
@@ -594,6 +630,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Post 4 (Sound)</h2>
               <StarButton
+                itemId="post4"
                 initialStarred={starred.post4}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, post4: starred }))}
               />
@@ -623,6 +660,7 @@ export default function Rooms() {
             <div className="module-header">
               <h2 className="module-title">Workshop</h2>
               <StarButton
+                itemId="workshop"
                 initialStarred={starred.workshop}
                 onToggle={(starred) => setStarred(prev => ({ ...prev, workshop: starred }))}
               />

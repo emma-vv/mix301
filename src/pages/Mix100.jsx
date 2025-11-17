@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BackgroundBlur from '../components/BackgroundBlur'
 import StarButton from '../components/StarButton'
@@ -9,6 +9,35 @@ export default function Mix100() {
   const [isCourseInfoOpen, setIsCourseInfoOpen] = useState(false)
   const [isUpcomingOpen, setIsUpcomingOpen] = useState(false)
   const [isPastOpen, setIsPastOpen] = useState(false)
+
+  // Force background update when content expands/collapses
+  useEffect(() => {
+    const updateBackground = () => {
+      // Use double requestAnimationFrame to ensure DOM has fully updated
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          // Force a reflow to ensure layout is calculated
+          void document.body.offsetHeight
+          // Trigger resize and scroll events to update background blur
+          window.dispatchEvent(new Event('resize', { bubbles: true }))
+          window.dispatchEvent(new Event('scroll', { bubbles: true }))
+        })
+      })
+    }
+
+    // Update at multiple points during the transition
+    updateBackground()
+    const timeoutId1 = setTimeout(updateBackground, 50) // Early in transition
+    const timeoutId2 = setTimeout(updateBackground, 150) // Mid-transition
+    const timeoutId3 = setTimeout(updateBackground, 250) // Late in transition
+    const timeoutId4 = setTimeout(updateBackground, 400) // After transition completes
+    return () => {
+      clearTimeout(timeoutId1)
+      clearTimeout(timeoutId2)
+      clearTimeout(timeoutId3)
+      clearTimeout(timeoutId4)
+    }
+  }, [isCourseInfoOpen, isUpcomingOpen, isPastOpen])
 
   const upcomingActivities = [
     { date: "Tue Oct 14", time: "08:15 - 10:00", location: "Seminar 1" },
@@ -29,7 +58,20 @@ export default function Mix100() {
     <>
       <BackgroundBlur />
       <div className="course-detail-body" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div 
+          className="container" 
+          style={{ 
+            position: 'relative', 
+            zIndex: 1,
+            maxWidth: '345px',
+            margin: '0 auto',
+            paddingTop: '60px',
+            paddingBottom: '115px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '24px',
+          }}
+        >
           <div className="header">
             <button className="back-button back-button-visible" onClick={() => navigate('/courses')} aria-label="Back">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
@@ -37,7 +79,7 @@ export default function Mix100() {
               </svg>
             </button>
             <h1 className="header-title">MIX100</h1>
-            <StarButton initialStarred={true} />
+            <StarButton itemId="MIX100" initialStarred={true} />
           </div>
 
           <div className="divider"></div>
@@ -189,7 +231,7 @@ export default function Mix100() {
       </div>
       <style>{`
         .course-detail-body {
-          padding: 60px 24px 24px 24px;
+          padding: 0;
         }
 
         .activities-section {
@@ -205,11 +247,13 @@ export default function Mix100() {
           max-height: 0;
           overflow: hidden;
           opacity: 0;
-          transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+          transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, margin-top 0.3s ease;
+          will-change: max-height, opacity;
+          contain: layout;
         }
 
         .info-card-expanded.expanded-open {
-          max-height: 500px;
+          max-height: 1000px;
           opacity: 1;
           margin-top: 24px;
         }
@@ -218,6 +262,8 @@ export default function Mix100() {
           max-height: 0;
           opacity: 0;
           margin-top: 0;
+          margin-bottom: 0;
+          padding: 0;
         }
 
         .activities-expandable {
@@ -227,25 +273,31 @@ export default function Mix100() {
           display: flex;
           flex-direction: column;
           gap: 20px;
-          transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+          transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, margin-top 0.3s ease;
+          will-change: max-height, opacity;
+          contain: layout;
+          box-sizing: border-box;
         }
 
         .activities-expandable.expanded-open {
-          max-height: 2000px;
+          max-height: 5000px;
           opacity: 1;
           margin-top: 20px;
+          overflow: visible;
         }
 
         .activities-expandable.expanded-closed {
           max-height: 0;
           opacity: 0;
           margin-top: 0;
+          overflow: hidden;
         }
 
         .activity-card-expandable {
           opacity: 0;
           transform: translateY(-10px);
-          transition: opacity 0.3s ease, transform 0.3s ease;
+          transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
+          will-change: opacity, transform;
         }
 
         .activities-expandable.expanded-open .activity-card-expandable {
