@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  width: 100%;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  /* Prevent white edges */
+  background: linear-gradient(to left, #280d5f, #30136e 40%, #280d5f);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   background: linear-gradient(to left, #280d5f, #30136e 40%, #280d5f);
@@ -15,6 +26,12 @@ body {
   position: relative;
   overflow-x: hidden;
   width: 100vw;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  /* Prevent white edges on scroll */
+  -webkit-tap-highlight-color: transparent;
+  /* Prevent bounce scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 #root {

@@ -1,0 +1,11 @@
+{
+  "name": "Aurora - MIX301",
+  "short_name": "Aurora",
+  "description": "MIX301 Aurora App",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#280d5f",
+  "theme_color": "#6521f1",
+  "orientation": "portrait"
+}
+
