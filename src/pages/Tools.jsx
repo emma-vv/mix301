@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
@@ -10,40 +10,88 @@ const equipment = [
     name: "Canon EOS 2000D",
     slug: "canon-eos-2000d",
     imageSize: { width: "93px", height: "86px" },
+    categories: ["Camera", "Video"],
   },
   {
     id: 2,
     name: "Godox LEDP260C",
     slug: "godox-ledp260c",
     imageSize: { width: "78px", height: "78px" },
+    categories: ["Light"],
   },
   {
     id: 3,
     name: "Rode VideoMic Rycote",
     slug: "rode-videomic-rycote",
     imageSize: { width: "100px", height: "100px" },
+    categories: ["Sound"],
   },
   {
     id: 4,
     name: "GoPro Hero 11 Black Mini",
     slug: "gopro-hero-11-black-mini",
     imageSize: { width: "92px", height: "100px" },
+    categories: ["Camera", "Video"],
   },
   {
     id: 5,
     name: "Joby Gorillapod 500 Action mount",
     slug: "joby-gorillapod-500",
     imageSize: { width: "100px", height: "100px" },
+    categories: ["Mount"],
   },
   {
     id: 6,
     name: "HDMI cable 10m",
     slug: "hdmi-cable-10m",
     imageSize: { width: "100px", height: "100px" },
+    categories: ["Cable"],
   },
 ];
 
 export default function Tools() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState(new Set());
+
+  const filterCategories = [
+    "Camera",
+    "Video",
+    "Light",
+    "Electricity",
+    "Sound",
+    "Media",
+    "Cable",
+    "Key",
+    "Mount",
+    "IT",
+  ];
+
+  const handleFilterToggle = (category) => {
+    setSelectedFilters((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(category)) {
+        newSet.delete(category);
+      } else {
+        newSet.add(category);
+      }
+      return newSet;
+    });
+  };
+
+  // Filter equipment based on selected filters
+  const filteredEquipment =
+    selectedFilters.size === 0
+      ? equipment
+      : equipment.filter((item) =>
+          item.categories.some((cat) => selectedFilters.has(cat))
+        );
+
+  // Group filtered equipment into rows of 2
+  const equipmentRows = [];
+  for (let i = 0; i < filteredEquipment.length; i += 2) {
+    equipmentRows.push(filteredEquipment.slice(i, i + 2));
+  }
+
   return (
     <>
       <BackgroundBlur />
@@ -89,157 +137,110 @@ export default function Tools() {
                 className="tools-search-input"
               />
             </div>
-            <button className="tools-filter-button" aria-label="Filter">
+            <button
+              className="tools-filter-button"
+              aria-label="Filter"
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+            >
               <i
-                className="fas fa-filter"
+                className={isFilterOpen ? "fas fa-times" : "fas fa-filter"}
                 style={{ fontSize: "18px", color: "white" }}
               ></i>
             </button>
+          </div>
+
+          {/* Filter Menu */}
+          <div
+            className={`tools-filter-menu ${
+              isFilterOpen
+                ? "tools-filter-menu-open"
+                : "tools-filter-menu-closed"
+            }`}
+          >
+            <div className="tools-filter-menu-content">
+              {filterCategories.map((category) => (
+                <div
+                  key={category}
+                  className={`pill-filter ${
+                    selectedFilters.has(category) ? "active" : ""
+                  }`}
+                  onClick={() => handleFilterToggle(category)}
+                >
+                  {category}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Selected Filters Pills */}
+          <div
+            className={`pill-filters ${
+              selectedFilters.size > 0 ? "pill-filters-visible" : ""
+            } ${!isFilterOpen ? "pill-filters-no-menu" : ""}`}
+          >
+            {Array.from(selectedFilters).map((category) => (
+              <div
+                key={category}
+                className="pill-filter active pill-filter-enter"
+                onClick={() => handleFilterToggle(category)}
+              >
+                <i
+                  className="fas fa-times"
+                  style={{ marginRight: "6px", fontSize: "12px" }}
+                ></i>
+                {category}
+              </div>
+            ))}
           </div>
 
           {/* Popular Equipment Section */}
           <div className="tools-popular-section">
             <h2 className="tools-popular-heading">Popular equipment</h2>
             <div className="tools-equipment-container">
-              {/* Row 1 */}
-              <div className="tools-equipment-row">
-                <Link
-                  to={`/tools/${equipment[0].slug}`}
-                  className="tools-equipment-card"
-                  style={{ textDecoration: "none" }}
+              {equipmentRows.map((row, rowIndex) => (
+                <div
+                  key={rowIndex}
+                  className={`tools-equipment-row ${
+                    rowIndex === equipmentRows.length - 1 &&
+                    equipmentRows.length === 3
+                      ? "tools-equipment-row-3"
+                      : ""
+                  }`}
                 >
-                  <div
-                    className="tools-equipment-image tools-equipment-image-standard"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <i
-                      className="fas fa-image"
-                      style={{
-                        fontSize: "24px",
-                        color: "rgba(255, 255, 255, 0.3)",
-                      }}
-                    ></i>
-                  </div>
-                  <p className="tools-equipment-name">{equipment[0].name}</p>
-                </Link>
-                <div className="tools-equipment-card">
-                  <div
-                    className="tools-equipment-image tools-equipment-image-standard"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <i
-                      className="fas fa-image"
-                      style={{
-                        fontSize: "24px",
-                        color: "rgba(255, 255, 255, 0.3)",
-                      }}
-                    ></i>
-                  </div>
-                  <p className="tools-equipment-name">{equipment[1].name}</p>
+                  {row.map((item) => (
+                    <Link
+                      key={item.id}
+                      to={`/tools/${item.slug}`}
+                      className="tools-equipment-card tools-equipment-card-enter"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div
+                        className="tools-equipment-image tools-equipment-image-standard"
+                        style={{
+                          background: "rgba(255, 255, 255, 0.1)",
+                          borderRadius: "20px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <i
+                          className="fas fa-image"
+                          style={{
+                            fontSize: "24px",
+                            color: "rgba(255, 255, 255, 0.3)",
+                          }}
+                        ></i>
+                      </div>
+                      <p className="tools-equipment-name">{item.name}</p>
+                    </Link>
+                  ))}
+                  {/* Add empty placeholder if row has only one item */}
+                  {row.length === 1 && (
+                    <div style={{ flex: "0 0 calc((100% - 24px) / 2)" }}></div>
+                  )}
                 </div>
-              </div>
-              {/* Row 2 */}
-              <div className="tools-equipment-row">
-                <div className="tools-equipment-card">
-                  <div
-                    className="tools-equipment-image tools-equipment-image-standard"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <i
-                      className="fas fa-image"
-                      style={{
-                        fontSize: "24px",
-                        color: "rgba(255, 255, 255, 0.3)",
-                      }}
-                    ></i>
-                  </div>
-                  <p className="tools-equipment-name">{equipment[2].name}</p>
-                </div>
-                <div className="tools-equipment-card">
-                  <div
-                    className="tools-equipment-image tools-equipment-image-standard"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <i
-                      className="fas fa-image"
-                      style={{
-                        fontSize: "24px",
-                        color: "rgba(255, 255, 255, 0.3)",
-                      }}
-                    ></i>
-                  </div>
-                  <p className="tools-equipment-name">{equipment[3].name}</p>
-                </div>
-              </div>
-              {/* Row 3 - different gap - copied from row 2 */}
-              <div className="tools-equipment-row tools-equipment-row-3">
-                <div className="tools-equipment-card">
-                  <div
-                    className="tools-equipment-image tools-equipment-image-standard"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <i
-                      className="fas fa-image"
-                      style={{
-                        fontSize: "24px",
-                        color: "rgba(255, 255, 255, 0.3)",
-                      }}
-                    ></i>
-                  </div>
-                  <p className="tools-equipment-name">{equipment[4].name}</p>
-                </div>
-                <div className="tools-equipment-card">
-                  <div
-                    className="tools-equipment-image tools-equipment-image-standard"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <i
-                      className="fas fa-image"
-                      style={{
-                        fontSize: "24px",
-                        color: "rgba(255, 255, 255, 0.3)",
-                      }}
-                    ></i>
-                  </div>
-                  <p className="tools-equipment-name">{equipment[5].name}</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -301,6 +302,10 @@ export default function Tools() {
 
         .tools-filter-button:hover {
           background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tools-filter-button i {
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .tools-popular-section {
@@ -390,6 +395,127 @@ export default function Tools() {
           text-align: center;
           margin: 0;
           line-height: normal;
+        }
+
+        .tools-filter-menu {
+          width: 100%;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1.352px solid rgba(255, 255, 255, 0.1);
+          border-radius: 14px;
+          padding: 20px;
+          margin-top: -16px;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tools-filter-menu-closed {
+          max-height: 0 !important;
+          opacity: 0;
+          padding-top: 0 !important;
+          padding-bottom: 0 !important;
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+          border-width: 0 !important;
+          height: 0 !important;
+          min-height: 0 !important;
+        }
+
+        .tools-filter-menu-open {
+          max-height: 500px;
+          opacity: 1;
+        }
+
+        .tools-filter-menu-content {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .pill-filters {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-top: -24px;
+          margin-bottom: 0;
+          max-height: 0;
+          opacity: 0;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pill-filters-visible {
+          max-height: 100px;
+          opacity: 1;
+          margin-top: -8px;
+          margin-bottom: 4px;
+        }
+
+        .pill-filters-no-menu.pill-filters-visible {
+          margin-top: -20px;
+        }
+
+        .pill-filter {
+          padding: 8px 16px;
+          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: white;
+          font-size: 14px;
+          font-weight: 400;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          display: flex;
+          align-items: center;
+          font-family: "Roboto", sans-serif;
+          transform: scale(1);
+        }
+
+        .pill-filter:hover {
+          background: rgba(255, 255, 255, 0.1);
+          transform: scale(1.05);
+        }
+
+        .pill-filter.active {
+          background: linear-gradient(
+            to bottom,
+            rgba(193, 241, 90, 0.8),
+            rgba(168, 212, 68, 0.8)
+          );
+          border-color: transparent;
+        }
+
+        .pill-filter-enter {
+          animation: pillFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes pillFadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.8) translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        .tools-equipment-card {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tools-equipment-card-enter {
+          animation: cardFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes cardFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       `}</style>
     </>
