@@ -74,6 +74,9 @@ export default function Seminar1() {
     { time: "22:00", top: 730.32 },
   ];
 
+  // Horizontal lines at each time marker position
+  // Lines extend from left (after time markers) to right
+
   return (
     <>
       <BackgroundBlur />
@@ -146,7 +149,7 @@ export default function Seminar1() {
               style={{ width: "100%" }}
             >
               <div style={{ width: "20px", height: "20px" }}></div>
-              <span className="info-card-text">Room Information</span>
+              <span className="info-card-text">Room information</span>
               <i
                 className={`fas fa-chevron-${isRoomInfoOpen ? "up" : "down"}`}
                 style={{ color: "white" }}
@@ -160,14 +163,37 @@ export default function Seminar1() {
               }`}
             >
               <div className="info-card-content">
-                <div className="info-item">
-                  <span className="info-label">Capacity</span>
-                  <span className="info-value">30 people</span>
+                {/* Room type */}
+                <div className="info-row">
+                  <span className="info-label">Room type</span>
+                  <span className="info-value">Seminar room</span>
                 </div>
-                <div className="divider" style={{ margin: "10px 0" }}></div>
-                <div className="info-item">
-                  <span className="info-label">Equipment</span>
-                  <span className="info-value">Projector, Whiteboard</span>
+                <div className="info-divider"></div>
+                
+                {/* Room capacity */}
+                <div className="info-row">
+                  <span className="info-label">Room capacity</span>
+                  <span className="info-value">20 spots</span>
+                </div>
+                <div className="info-divider"></div>
+                
+                {/* Location */}
+                <div className="info-row">
+                  <span className="info-label">Location</span>
+                  <a href="#" className="info-link" onClick={(e) => e.preventDefault()}>
+                    View on Mazemap
+                  </a>
+                </div>
+                <div className="info-divider"></div>
+                
+                {/* Tools */}
+                <div className="info-row">
+                  <span className="info-label">Tools</span>
+                  <span className="info-value">Laptop connection</span>
+                </div>
+                <div className="info-row" style={{ marginTop: "0", paddingTop: "0" }}>
+                  <span className="info-label" style={{ visibility: "hidden" }}>Tools</span>
+                  <span className="info-value">Projector</span>
                 </div>
               </div>
             </div>
@@ -234,7 +260,8 @@ export default function Seminar1() {
             style={{
               position: "relative",
               width: "100%",
-              minHeight: "800px", // Based on last time marker at 730.32px
+              height: "760px", // Based on last time marker at 730.32px + small padding
+              isolation: "isolate",
             }}
           >
             {/* Time Markers - using exact positions from Figma */}
@@ -254,21 +281,6 @@ export default function Seminar1() {
               >
                 {marker.time}
               </div>
-            ))}
-
-            {/* Vertical Lines - one line for each time marker position */}
-            {timeMarkers.map((marker) => (
-              <div
-                key={`line-${marker.time}`}
-                style={{
-                  position: "absolute",
-                  left: "59.38px",
-                  top: `${marker.top}px`,
-                  width: "0.993px",
-                  height: "345px",
-                  background: "rgba(255, 255, 255, 0.15)",
-                }}
-              ></div>
             ))}
 
             {/* Booking Blocks - using exact positions from Figma */}
@@ -302,6 +314,7 @@ export default function Seminar1() {
                     padding: "16px 15.28px",
                     display: "flex",
                     alignItems: "flex-start",
+                    zIndex: 100,
                   }}
                 >
                   <p
@@ -317,6 +330,24 @@ export default function Seminar1() {
                 </div>
               );
             })}
+
+            {/* Horizontal Lines - rendered after booking blocks so they appear behind */}
+            {timeMarkers.map((marker) => (
+              <div
+                key={`line-${marker.time}`}
+                style={{
+                  position: "absolute",
+                  left: "59.38px",
+                  top: `${marker.top}px`,
+                  width: "calc(100% - 59.38px)",
+                  height: "0.993px",
+                  background: "rgba(255, 255, 255, 0.15)",
+                  transform: "translateY(-50%)",
+                  zIndex: -1,
+                  pointerEvents: "none",
+                }}
+              ></div>
+            ))}
           </div>
         </div>
       </div>
@@ -358,27 +389,56 @@ export default function Seminar1() {
         .info-card-content {
           background: rgba(255, 255, 255, 0.05);
           border: 1.352px solid rgba(255, 255, 255, 0.05);
-          border-radius: 16px;
-          padding: 24px;
+          border-radius: 14px;
+          padding: 20px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .info-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 20px;
           width: 100%;
         }
 
-        .info-item {
-          display: flex;
-          flex-direction: column;
-          gap: 3.993px;
-        }
-
         .info-label {
-          font-size: 12px;
+          font-size: 16px;
           font-weight: 400;
-          color: rgba(255, 255, 255, 0.6);
+          color: white;
+          flex: 1;
         }
 
         .info-value {
           font-size: 16px;
           font-weight: 400;
           color: white;
+          text-align: right;
+          white-space: nowrap;
+        }
+
+        .info-link {
+          font-size: 16px;
+          font-weight: 400;
+          color: white;
+          text-decoration: underline;
+          text-align: right;
+          white-space: nowrap;
+          cursor: pointer;
+        }
+
+        .info-link:hover {
+          opacity: 0.8;
+        }
+
+        .info-divider {
+          height: 0.993px;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.15);
+          margin: 0;
         }
       `}</style>
     </>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
 import "../index.css";
@@ -36,6 +37,7 @@ const roomData = {
 };
 
 export default function MyBookings() {
+  const navigate = useNavigate();
   const [toolBookings, setToolBookings] = useState([]);
   const [roomBookings, setRoomBookings] = useState([]);
   const [isPastOpen, setIsPastOpen] = useState(false);
@@ -185,25 +187,34 @@ export default function MyBookings() {
       
       // Add example tool bookings if needed to match Dashboard count (5 total)
       // Dashboard shows 5 active bookings, so we need 2 tools + 3 rooms
+      // Note: The first booking (canon-eos-2000d) is only added if there are no real bookings
+      // The second booking (godox-ledp260c) is always added as a default and cannot be canceled
       if (tools.length === 0) {
         tools.push({
           id: "canon-eos-2000d",
           name: "Canon EOS 2000D",
           icon: "fa-wrench",
           type: "tool",
-          dateRange: "Oct 20 - Oct 25",
+          dateRange: "Mon Oct 27 - Wed Oct 29",
+          category: "Video",
+          additionalNotes: "Includes: DSLR camera, 2 lenses (24-70mm, 50mm), tripod, memory cards, battery pack.",
           startDate: new Date(),
+          isDefault: true, // Mark as default since it's added when no real bookings exist
         });
       }
       // Always ensure we have at least 2 tool bookings to match the expected count
+      // The second one (godox-ledp260c) is always a default and should not be cancelable
       if (tools.length === 1) {
         tools.push({
           id: "godox-ledp260c",
           name: "Godox LEDP260C",
           icon: "fa-wrench",
           type: "tool",
-          dateRange: "Oct 18 - Oct 22",
+          dateRange: "Mon Oct 18 - Fri Oct 22",
+          category: "Light",
+          additionalNotes: "Includes: LED light panel, power adapter, carrying case.",
           startDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+          isDefault: true, // Mark as default so it can't be canceled
         });
       }
       
@@ -255,7 +266,12 @@ export default function MyBookings() {
                 <h2 className="my-bookings-section-title">Tools</h2>
                 <div className="my-bookings-list">
                   {toolBookings.map((booking) => (
-                    <div key={booking.id} className="my-bookings-item my-bookings-item-tool">
+                    <div
+                      key={booking.id}
+                      className="my-bookings-item my-bookings-item-tool"
+                      onClick={() => navigate(`/bookings/${booking.id}`, { state: { ...booking, isDefault: booking.isDefault || false } })}
+                      style={{ cursor: "pointer" }}
+                    >
                       <div className="my-bookings-item-glow my-bookings-item-glow-tool"></div>
                       <div className="my-bookings-item-icon">
                         <i className={`fas ${booking.icon}`} style={{ fontSize: "24px", color: "#ffb89d" }}></i>
