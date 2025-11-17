@@ -55,7 +55,7 @@ export default function Dashboard() {
           <div className="divider-line"></div>
 
           {/* Module Cards */}
-          <div className="module-card-dashboard tools">
+          <Link to="/tools" className="module-card-dashboard tools">
             <div className="module-glow tools"></div>
             <div className="module-card-content">
               <div className="module-icon-wrapper">
@@ -67,7 +67,7 @@ export default function Dashboard() {
               </div>
               <i className="fas fa-chevron-right module-arrow"></i>
             </div>
-          </div>
+          </Link>
 
           <Link to="/rooms" className="module-card-dashboard rooms">
             <div className="module-glow rooms"></div>

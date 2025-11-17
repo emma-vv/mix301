@@ -24,7 +24,7 @@ export default function BottomNav() {
         <i className="fas fa-graduation-cap"></i>
       </Link>
       <Link
-        to="#"
+        to="/tools"
         className={`nav-icon ${isActive('/tools') ? 'nav-icon-active' : ''}`}
         aria-label="Tools"
       >

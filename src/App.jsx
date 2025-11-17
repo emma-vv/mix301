@@ -5,6 +5,10 @@ import Login2 from "./pages/Login2";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import Rooms from "./pages/Rooms";
+import Tools from "./pages/Tools";
+import ToolDetail from "./pages/ToolDetail";
+import ToolBookingGuide from "./pages/ToolBookingGuide";
+import ToolBookingCalendar from "./pages/ToolBookingCalendar";
 import Mix100 from "./pages/Mix100";
 import Profile from "./pages/Profile";
 import "./index.css";
@@ -18,6 +22,16 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/rooms" element={<Rooms />} />
+        <Route path="/tools" element={<Tools />} />
+        <Route path="/tools/:toolId" element={<ToolDetail />} />
+        <Route
+          path="/tools/:toolId/booking-guide"
+          element={<ToolBookingGuide />}
+        />
+        <Route
+          path="/tools/:toolId/booking-calendar"
+          element={<ToolBookingCalendar />}
+        />
         <Route path="/mix100" element={<Mix100 />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
