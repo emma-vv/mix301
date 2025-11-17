@@ -338,6 +338,7 @@ export default function BookingDetail() {
       {/* Cancel Booking Confirmation Modal */}
       {isCancelModalOpen && (
         <div
+          className="booking-modal-overlay-animated"
           style={{
             position: "fixed",
             top: 0,
@@ -359,6 +360,7 @@ export default function BookingDetail() {
           }}
         >
           <div
+            className="booking-modal-content-animated"
             style={{
               background: "rgba(0, 0, 0, 0.5)",
               backdropFilter: "blur(40px)",
@@ -372,6 +374,7 @@ export default function BookingDetail() {
               gap: "24px",
               alignItems: "center",
             }}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Title */}
             <h2
@@ -455,6 +458,7 @@ export default function BookingDetail() {
       {/* Info Modal */}
       {isInfoModalOpen && (
         <div
+          className="booking-modal-overlay-animated"
           style={{
             position: "fixed",
             top: 0,
@@ -476,6 +480,7 @@ export default function BookingDetail() {
           }}
         >
           <div
+            className="booking-modal-content-animated"
             style={{
               background: "rgba(0, 0, 0, 0.5)",
               backdropFilter: "blur(40px)",
@@ -489,6 +494,7 @@ export default function BookingDetail() {
               gap: "24px",
               alignItems: "center",
             }}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div
@@ -596,6 +602,32 @@ export default function BookingDetail() {
           </div>
         </div>
       )}
+      <style>{`
+        @keyframes modalFadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes modalSlideIn {
+          from {
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+          }
+        }
+        .booking-modal-overlay-animated {
+          animation: modalFadeIn 0.3s ease;
+        }
+        .booking-modal-content-animated {
+          animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+      `}</style>
     </>
   );
 }
