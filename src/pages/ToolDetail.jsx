@@ -7,9 +7,83 @@ import "../index.css";
 const toolData = {
   "canon-eos-2000d": {
     name: "Canon EOS 2000D",
-    imageUrl: "", // Placeholder for now
-    notes:
-      "Includes: DSLR camera, 2 lenses (24-70mm, 50mm), tripod, memory cards, battery pack.",
+    imageUrl: "",
+    notes: "Includes: DSLR camera, 2 lenses (24-70mm, 50mm), tripod, memory cards, battery pack.",
+  },
+  "godox-ledp260c": {
+    name: "Godox LEDP260C",
+    imageUrl: "",
+    notes: "Includes: LED light panel, power adapter, carrying case, diffuser panel.",
+  },
+  "rode-videomic-rycote": {
+    name: "Rode VideoMic Rycote",
+    imageUrl: "",
+    notes: "Includes: Shotgun microphone, windshield, shock mount, XLR cable.",
+  },
+  "gopro-hero-11-black-mini": {
+    name: "GoPro Hero 11 Black Mini",
+    imageUrl: "",
+    notes: "Includes: Action camera, waterproof housing, mounting accessories, USB-C cable.",
+  },
+  "joby-gorillapod-500": {
+    name: "Joby Gorillapod 500 Action mount",
+    imageUrl: "",
+    notes: "Includes: Flexible tripod, action camera mount, carrying case.",
+  },
+  "hdmi-cable-10m": {
+    name: "HDMI cable 10m",
+    imageUrl: "",
+    notes: "High-speed HDMI cable, 10 meters length, supports 4K resolution.",
+  },
+  "sony-a7-iii": {
+    name: "Sony A7 III",
+    imageUrl: "",
+    notes: "Includes: Mirrorless camera body, battery, charger, USB cable, strap.",
+  },
+  "aputure-300d": {
+    name: "Aputure 300D",
+    imageUrl: "",
+    notes: "Includes: LED light, power supply, remote control, carrying case.",
+  },
+  "shure-sm7b": {
+    name: "Shure SM7B",
+    imageUrl: "",
+    notes: "Includes: Dynamic microphone, XLR cable, shock mount, pop filter.",
+  },
+  "dji-mini-3-pro": {
+    name: "DJI Mini 3 Pro",
+    imageUrl: "",
+    notes: "Includes: Drone, remote controller, batteries, charger, propellers, carrying case.",
+  },
+  "manfrotto-tripod": {
+    name: "Manfrotto Tripod",
+    imageUrl: "",
+    notes: "Includes: Carbon fiber tripod, ball head, quick release plate, carrying bag.",
+  },
+  "xlr-cable-5m": {
+    name: "XLR Cable 5m",
+    imageUrl: "",
+    notes: "Professional XLR cable, 5 meters, balanced audio connection.",
+  },
+  "canon-24-70mm-lens": {
+    name: "Canon 24-70mm Lens",
+    imageUrl: "",
+    notes: "Includes: EF 24-70mm f/2.8L lens, lens cap, lens hood, carrying case.",
+  },
+  "neewer-led-panel": {
+    name: "Neewer LED Panel",
+    imageUrl: "",
+    notes: "Includes: LED light panel, dimmer control, power adapter, color filters.",
+  },
+  "zoom-h6-recorder": {
+    name: "Zoom H6 Recorder",
+    imageUrl: "",
+    notes: "Includes: Portable audio recorder, XLR inputs, SD card, USB cable, windscreen.",
+  },
+  "usb-c-cable-3m": {
+    name: "USB-C Cable 3m",
+    imageUrl: "",
+    notes: "USB-C to USB-C cable, 3 meters, fast charging and data transfer.",
   },
 };
 
@@ -20,7 +94,11 @@ export default function ToolDetail() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const totalImages = 5; // Based on the carousel dots in the design
 
-  const tool = toolData[toolId] || toolData["canon-eos-2000d"];
+  const tool = toolData[toolId] || {
+    name: toolId ? toolId.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") : "Tool",
+    imageUrl: "",
+    notes: "No additional information available for this tool.",
+  };
 
   const handlePreviousImage = () => {
     setCurrentImageIndex((prev) => (prev === 0 ? totalImages - 1 : prev - 1));

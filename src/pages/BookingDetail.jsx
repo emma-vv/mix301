@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
+import { toastManager } from "../utils/toast";
 import "../index.css";
 
 export default function BookingDetail() {
@@ -407,10 +408,21 @@ export default function BookingDetail() {
                   // Also remove currentDate storage for this booking
                   const currentDateKey = `booking_${booking.id}_currentDate`;
                   localStorage.removeItem(currentDateKey);
+                  
+                  toastManager.success("Booking cancelled successfully");
+                  
+                  // Dispatch custom event to trigger reload on MyBookings page
+                  window.dispatchEvent(new CustomEvent('bookingCanceled', { 
+                    detail: { bookingId: booking.id }
+                  }));
+                } else {
+                  toastManager.info("This booking cannot be cancelled");
                 }
                 
                 // Navigate back to bookings page
-                navigate("/bookings");
+                setTimeout(() => {
+                  navigate("/bookings");
+                }, 300);
               }}
             >
               <span>Yes, Cancel Booking</span>

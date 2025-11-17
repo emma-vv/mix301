@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import BackgroundBlur from '../components/BackgroundBlur'
 import BottomNav from '../components/BottomNav'
 import StarButton from '../components/StarButton'
@@ -30,6 +30,8 @@ const defaultStarred = {
 }
 
 export default function Rooms() {
+  const navigate = useNavigate();
+  
   // Load favorites from localStorage on mount
   const loadFavorites = () => {
     try {
@@ -74,7 +76,10 @@ export default function Rooms() {
             <div className="card-glow glow-jou"></div>
             <div className="module-header">
               <h2 className="module-title">Seminar 1</h2>
-              <div onClick={(e) => e.preventDefault()}>
+              <div onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}>
                 <StarButton
                   itemId="seminar1"
                   initialStarred={starred.seminar1}
@@ -94,13 +99,17 @@ export default function Rooms() {
               <div className="time-line" style={{ left: '0px', height: '92px', top: '0.03px' }}></div>
               <div className="time-line" style={{ left: '147.99px', height: '92px', top: '0.03px' }}></div>
               <div className="time-line" style={{ left: '221.99px', height: '24px', top: '0.03px' }}></div>
-              <Link
-                to="/mix100"
+              <div
                 className="event-block event-mix clickable-event"
-                style={{ left: '18px', top: '24px', width: '129px' }}
+                style={{ left: '18px', top: '24px', width: '129px', cursor: 'pointer' }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  navigate('/mix100');
+                }}
               >
                 MIX100
-              </Link>
+              </div>
               <div className="event-block event-jou" style={{ left: '166.99px', top: '24.03px', width: '129px' }}>
                 JOU100
               </div>

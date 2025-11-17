@@ -47,11 +47,82 @@ const equipment = [
     imageSize: { width: "100px", height: "100px" },
     categories: ["Cable"],
   },
+  {
+    id: 7,
+    name: "Sony A7 III",
+    slug: "sony-a7-iii",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Camera", "Video"],
+  },
+  {
+    id: 8,
+    name: "Aputure 300D",
+    slug: "aputure-300d",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Light"],
+  },
+  {
+    id: 9,
+    name: "Shure SM7B",
+    slug: "shure-sm7b",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Sound"],
+  },
+  {
+    id: 10,
+    name: "DJI Mini 3 Pro",
+    slug: "dji-mini-3-pro",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Camera", "Video"],
+  },
+  {
+    id: 11,
+    name: "Manfrotto Tripod",
+    slug: "manfrotto-tripod",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Mount"],
+  },
+  {
+    id: 12,
+    name: "XLR Cable 5m",
+    slug: "xlr-cable-5m",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Cable", "Sound"],
+  },
+  {
+    id: 13,
+    name: "Canon 24-70mm Lens",
+    slug: "canon-24-70mm-lens",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Camera"],
+  },
+  {
+    id: 14,
+    name: "Neewer LED Panel",
+    slug: "neewer-led-panel",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Light"],
+  },
+  {
+    id: 15,
+    name: "Zoom H6 Recorder",
+    slug: "zoom-h6-recorder",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Sound", "Media"],
+  },
+  {
+    id: 16,
+    name: "USB-C Cable 3m",
+    slug: "usb-c-cable-3m",
+    imageSize: { width: "100px", height: "100px" },
+    categories: ["Cable", "IT"],
+  },
 ];
 
 export default function Tools() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState(new Set());
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filterCategories = [
     "Camera",
@@ -78,13 +149,20 @@ export default function Tools() {
     });
   };
 
-  // Filter equipment based on selected filters
-  const filteredEquipment =
-    selectedFilters.size === 0
-      ? equipment
-      : equipment.filter((item) =>
-          item.categories.some((cat) => selectedFilters.has(cat))
-        );
+  // Filter equipment based on selected filters and search query
+  const filteredEquipment = equipment.filter((item) => {
+    // Search filter
+    const matchesSearch =
+      searchQuery.trim() === "" ||
+      item.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+    // Category filter
+    const matchesCategory =
+      selectedFilters.size === 0 ||
+      item.categories.some((cat) => selectedFilters.has(cat));
+
+    return matchesSearch && matchesCategory;
+  });
 
   // Group filtered equipment into rows of 2
   const equipmentRows = [];
@@ -135,6 +213,8 @@ export default function Tools() {
                 type="text"
                 placeholder="Search for equipment..."
                 className="tools-search-input"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
             <button
@@ -196,52 +276,62 @@ export default function Tools() {
           {/* Popular Equipment Section */}
           <div className="tools-popular-section">
             <h2 className="tools-popular-heading">Popular equipment</h2>
-            <div className="tools-equipment-container">
-              {equipmentRows.map((row, rowIndex) => (
-                <div
-                  key={rowIndex}
-                  className={`tools-equipment-row ${
-                    rowIndex === equipmentRows.length - 1 &&
-                    equipmentRows.length === 3
-                      ? "tools-equipment-row-3"
-                      : ""
-                  }`}
-                >
-                  {row.map((item) => (
-                    <Link
-                      key={item.id}
-                      to={`/tools/${item.slug}`}
-                      className="tools-equipment-card tools-equipment-card-enter"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div
-                        className="tools-equipment-image tools-equipment-image-standard"
-                        style={{
-                          background: "rgba(255, 255, 255, 0.1)",
-                          borderRadius: "20px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
+            {filteredEquipment.length === 0 ? (
+              <div className="empty-state">
+                <i className="fas fa-search"></i>
+                <h3>No equipment found</h3>
+                <p>Try adjusting your search or filters</p>
+              </div>
+            ) : (
+              <div className="tools-equipment-container">
+                {equipmentRows.map((row, rowIndex) => (
+                  <div
+                    key={rowIndex}
+                    className={`tools-equipment-row ${
+                      rowIndex === equipmentRows.length - 1 &&
+                      equipmentRows.length === 3
+                        ? "tools-equipment-row-3"
+                        : ""
+                    }`}
+                  >
+                    {row.map((item) => (
+                      <Link
+                        key={item.id}
+                        to={`/tools/${item.slug}`}
+                        className="tools-equipment-card tools-equipment-card-enter"
+                        style={{ textDecoration: "none" }}
                       >
-                        <i
-                          className="fas fa-image"
+                        <div
+                          className="tools-equipment-image tools-equipment-image-standard"
                           style={{
-                            fontSize: "24px",
-                            color: "rgba(255, 255, 255, 0.3)",
+                            background: "rgba(255, 255, 255, 0.1)",
+                            borderRadius: "20px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
                           }}
-                        ></i>
-                      </div>
-                      <p className="tools-equipment-name">{item.name}</p>
-                    </Link>
-                  ))}
-                  {/* Add empty placeholder if row has only one item */}
-                  {row.length === 1 && (
-                    <div style={{ flex: "0 0 calc((100% - 24px) / 2)" }}></div>
-                  )}
-                </div>
-              ))}
-            </div>
+                        >
+                          <i
+                            className="fas fa-image"
+                            style={{
+                              fontSize: "24px",
+                              color: "rgba(255, 255, 255, 0.3)",
+                            }}
+                          ></i>
+                        </div>
+                        <p className="tools-equipment-name">{item.name}</p>
+                      </Link>
+                    ))}
+                    {/* Add empty placeholder if row has only one item */}
+                    {row.length === 1 && (
+                      <div
+                        style={{ flex: "0 0 calc((100% - 24px) / 2)" }}
+                      ></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

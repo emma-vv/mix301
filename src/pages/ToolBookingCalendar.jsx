@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
+import { toastManager } from "../utils/toast";
+import { getAppDate, isAppDate } from "../utils/appDate";
 import "../index.css";
 
 const toolData = {
@@ -22,15 +24,17 @@ export default function ToolBookingCalendar() {
   const storageKey = useMemo(() => `booking_${toolId}_selectedDates`, [toolId]);
   const currentDateKey = useMemo(() => `booking_${toolId}_currentDate`, [toolId]);
   
-  // Default to October 14th of current year
+  // Default to October 14th (app base date)
   const getDefaultDate = () => {
-    const defaultDate = new Date();
-    defaultDate.setMonth(9); // October (0-indexed)
-    defaultDate.setDate(14);
-    return defaultDate;
+    return getAppDate();
   };
   
   const [currentDate, setCurrentDate] = useState(() => {
+    // For new bookings, always default to October (app base date)
+    if (!isEditBooking) {
+      return getDefaultDate();
+    }
+    // For edit bookings, try to load saved date, otherwise default to October
     const key = `booking_${toolId}_currentDate`;
     try {
       const saved = localStorage.getItem(key);
@@ -98,27 +102,53 @@ export default function ToolBookingCalendar() {
   // Example booked dates - in real app, this would come from API
   // Using current year dynamically
   const currentYear = new Date().getFullYear();
-  const bookedDates = new Set([
-    // Single booked days
-    `${currentYear}-10-03`,
-    `${currentYear}-10-07`,
-    `${currentYear}-10-15`,
-    `${currentYear}-10-19`,
-    `${currentYear}-10-27`,
-    // Booked periods
-    `${currentYear}-10-08`,
-    `${currentYear}-10-09`,
-    `${currentYear}-10-10`,
-    `${currentYear}-10-11`,
-    `${currentYear}-10-12`,
-    `${currentYear}-10-20`,
-    `${currentYear}-10-21`,
-    `${currentYear}-10-22`,
-    `${currentYear}-10-23`,
-    `${currentYear}-10-24`,
-    `${currentYear}-10-25`,
-    `${currentYear}-10-26`,
-  ]);
+  const bookedDates = useMemo(() => {
+    const dates = new Set();
+    
+    // Helper to add date ranges
+    const addDateRange = (year, month, startDay, endDay) => {
+      for (let day = startDay; day <= endDay; day++) {
+        dates.add(`${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`);
+      }
+    };
+    
+    // September booked dates
+    addDateRange(currentYear, 9, 5, 7); // Sep 5-7
+    addDateRange(currentYear, 9, 12, 14); // Sep 12-14
+    dates.add(`${currentYear}-09-20`); // Sep 20
+    dates.add(`${currentYear}-09-25`); // Sep 25
+    addDateRange(currentYear, 9, 28, 30); // Sep 28-30
+    
+    // October booked dates (more extensive)
+    dates.add(`${currentYear}-10-03`); // Oct 3
+    dates.add(`${currentYear}-10-07`); // Oct 7
+    addDateRange(currentYear, 10, 8, 12); // Oct 8-12
+    dates.add(`${currentYear}-10-15`); // Oct 15
+    dates.add(`${currentYear}-10-19`); // Oct 19
+    addDateRange(currentYear, 10, 20, 26); // Oct 20-26
+    dates.add(`${currentYear}-10-27`); // Oct 27
+    dates.add(`${currentYear}-10-31`); // Oct 31
+    
+    // November booked dates
+    addDateRange(currentYear, 11, 1, 3); // Nov 1-3
+    dates.add(`${currentYear}-11-08`); // Nov 8
+    addDateRange(currentYear, 11, 11, 13); // Nov 11-13
+    dates.add(`${currentYear}-11-18`); // Nov 18
+    addDateRange(currentYear, 11, 22, 24); // Nov 22-24
+    dates.add(`${currentYear}-11-28`); // Nov 28
+    dates.add(`${currentYear}-11-30`); // Nov 30
+    
+    // December booked dates
+    addDateRange(currentYear, 12, 1, 5); // Dec 1-5
+    dates.add(`${currentYear}-12-10`); // Dec 10
+    addDateRange(currentYear, 12, 15, 17); // Dec 15-17
+    dates.add(`${currentYear}-12-20`); // Dec 20
+    addDateRange(currentYear, 12, 23, 25); // Dec 23-25
+    dates.add(`${currentYear}-12-28`); // Dec 28
+    dates.add(`${currentYear}-12-31`); // Dec 31
+    
+    return dates;
+  }, [currentYear]);
 
   const formatDateKey = (date) => {
     return date.toISOString().split("T")[0];
@@ -136,14 +166,24 @@ export default function ToolBookingCalendar() {
     if (selectedDates.size < 2) return false;
     const dates = Array.from(selectedDates).sort();
     const dateKey = formatDateKey(date);
-    return dateKey >= dates[0] && dateKey <= dates[dates.length - 1];
+    const startKey = dates[0];
+    const endKey = dates[dates.length - 1];
+    return dateKey > startKey && dateKey < endKey;
   };
 
   const handleDateClick = (date) => {
     const dateKey = formatDateKey(date);
 
-    // Don't allow clicking on booked dates
-    if (isDateBooked(date)) return;
+    // Don't allow clicking on booked dates - show notification
+    if (isDateBooked(date)) {
+      const dateStr = date.toLocaleDateString("en-US", { 
+        weekday: "short", 
+        month: "short", 
+        day: "numeric" 
+      });
+      toastManager.error(`Cannot select ${dateStr} - this date is already booked`);
+      return;
+    }
 
     // If clicking on a selected date, deselect it and all dates in range
     if (isDateSelected(date)) {
@@ -180,12 +220,13 @@ export default function ToolBookingCalendar() {
 
     // If we have one date selected, create a range
     if (selectedDates.size === 1) {
-      const firstDate = new Date(Array.from(selectedDates)[0]);
+      const firstDateKey = Array.from(selectedDates)[0];
+      const firstDate = new Date(firstDateKey);
       const secondDate = date;
       
       // Determine start and end dates
-      const start = firstDate < secondDate ? firstDate : secondDate;
-      const end = firstDate < secondDate ? secondDate : firstDate;
+      const start = firstDate < secondDate ? new Date(firstDate) : new Date(secondDate);
+      const end = firstDate < secondDate ? new Date(secondDate) : new Date(firstDate);
       
       // Add all dates in range (excluding booked dates)
       const newSelected = new Set();
@@ -364,65 +405,18 @@ export default function ToolBookingCalendar() {
                     const isSelected = isDateSelected(day);
                     const inRange = isDateInRange(day);
                     const isCurrentMonthDay = isCurrentMonth(day);
-                    
-                    // Determine position in range for styling
-                    const dates = Array.from(selectedDates).sort();
-                    let rangePosition = "none";
-                    if (selectedDates.size > 1) {
-                      const dateKey = formatDateKey(day);
-                      const sortedDates = dates;
-                      const dateIndex = sortedDates.indexOf(dateKey);
-                      if (dateIndex !== -1) {
-                        if (dateIndex === 0) {
-                          rangePosition = "start";
-                        } else if (dateIndex === sortedDates.length - 1) {
-                          rangePosition = "end";
-                        } else {
-                          rangePosition = "middle";
-                        }
-                      } else if (inRange) {
-                        // Check if this date is between selected dates
-                        const startDate = new Date(sortedDates[0]);
-                        const endDate = new Date(sortedDates[sortedDates.length - 1]);
-                        if (day >= startDate && day <= endDate) {
-                          rangePosition = "middle";
-                        }
-                      }
-                    }
-
-                    // Check if this day is part of a booked range
-                    let bookedRangeClass = "";
-                    if (isBooked && isCurrentMonthDay) {
-                      const dateKey = formatDateKey(day);
-                      // Check if previous/next days are also booked
-                      const prevDay = new Date(day);
-                      prevDay.setDate(day.getDate() - 1);
-                      const nextDay = new Date(day);
-                      nextDay.setDate(day.getDate() + 1);
-                      const prevBooked = bookedDates.has(formatDateKey(prevDay)) && isCurrentMonth(prevDay);
-                      const nextBooked = bookedDates.has(formatDateKey(nextDay)) && isCurrentMonth(nextDay);
-                      
-                      if (prevBooked && nextBooked) {
-                        bookedRangeClass = "booked-middle";
-                      } else if (prevBooked) {
-                        bookedRangeClass = "booked-end";
-                      } else if (nextBooked) {
-                        bookedRangeClass = "booked-start";
-                      } else {
-                        bookedRangeClass = "booked-single";
-                      }
-                    }
+                    const isToday = isAppDate(day) && isCurrentMonthDay && !isBooked && !isSelected;
 
                     return (
                       <div key={index} className="calendar-day-wrapper">
                         {isBooked && isCurrentMonthDay && (
-                          <div className={`booked-day-overlay ${bookedRangeClass}`}></div>
+                          <div className="booked-day-overlay"></div>
                         )}
-                        {isSelected && selectedDates.size === 1 && (
+                        {isSelected && (
                           <div className="selected-single-overlay"></div>
                         )}
-                        {(isSelected || inRange) && selectedDates.size > 1 && (
-                          <div className={`selected-range-day-overlay ${rangePosition}`}></div>
+                        {isToday && (
+                          <div className="today-overlay"></div>
                         )}
                         <button
                           className={`calendar-day ${isBooked ? "booked" : ""} ${
@@ -431,7 +425,6 @@ export default function ToolBookingCalendar() {
                             !isCurrentMonthDay ? "other-month" : ""
                           }`}
                           onClick={() => handleDateClick(day)}
-                          disabled={isBooked}
                         >
                           {day.getDate()}
                         </button>
@@ -467,6 +460,18 @@ export default function ToolBookingCalendar() {
             disabled={!hasSelection}
             onClick={() => {
               if (hasSelection) {
+                // Validate that selected dates don't conflict with booked dates
+                const selectedArray = Array.from(selectedDates);
+                const hasConflict = selectedArray.some(dateKey => {
+                  const date = new Date(dateKey);
+                  return isDateBooked(date);
+                });
+                
+                if (hasConflict) {
+                  toastManager.error("Selected dates include booked dates. Please choose different dates.");
+                  return;
+                }
+                
                 navigate(`/tools/${toolId}/booking-pickup`);
               }
             }}
@@ -579,37 +584,14 @@ export default function ToolBookingCalendar() {
           position: absolute;
           background: rgba(254, 66, 66, 0.4);
           border: 1.35px solid rgba(254, 66, 66, 0.05);
+          width: 39px;
           height: 39px;
+          border-radius: 50%;
           z-index: 0;
           pointer-events: none;
           left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .booked-day-overlay.booked-single {
-          width: 39px;
-          border-radius: 50%;
-        }
-
-        .booked-day-overlay.booked-start {
-          width: calc(100% + 10px);
-          left: 50%;
-          border-radius: 4.5372e7px 0 0 4.5372e7px;
-          transform: translateX(calc(-50% - 10px));
-        }
-
-        .booked-day-overlay.booked-middle {
-          width: calc(100% + 20px);
-          left: 50%;
-          border-radius: 0;
-          transform: translateX(-50%);
-        }
-
-        .booked-day-overlay.booked-end {
-          width: calc(100% + 10px);
-          left: 50%;
-          border-radius: 0 4.5372e7px 4.5372e7px 0;
-          transform: translateX(calc(-50% + 10px));
+          top: 50%;
+          transform: translate(-50%, -50%);
         }
 
         .selected-single-overlay {
@@ -626,35 +608,20 @@ export default function ToolBookingCalendar() {
           transform: translate(-50%, -50%);
         }
 
-        .selected-range-day-overlay {
+        .today-overlay {
           position: absolute;
           background: rgba(163, 200, 97, 0.3);
           border: 1.352px solid #a3c861;
-          height: 39px;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
           z-index: 0;
           pointer-events: none;
           left: 50%;
           top: 50%;
-          transform: translateY(-50%);
-        }
-
-        .selected-range-day-overlay.range-start {
-          width: calc(100% + 10px);
-          border-radius: 4.5372e7px 0 0 4.5372e7px;
-          transform: translate(calc(-50% - 10px), -50%);
-        }
-
-        .selected-range-day-overlay.range-middle {
-          width: calc(100% + 20px);
-          border-radius: 0;
           transform: translate(-50%, -50%);
         }
 
-        .selected-range-day-overlay.range-end {
-          width: calc(100% + 10px);
-          border-radius: 0 4.5372e7px 4.5372e7px 0;
-          transform: translate(calc(-50% + 10px), -50%);
-        }
 
         .calendar-day {
           background: transparent;
@@ -687,8 +654,7 @@ export default function ToolBookingCalendar() {
 
         .calendar-day.booked {
           color: rgba(255, 255, 255, 0.4);
-          cursor: not-allowed;
-          pointer-events: none;
+          cursor: pointer;
         }
 
         .calendar-day.selected {

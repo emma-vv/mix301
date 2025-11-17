@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
@@ -7,6 +7,51 @@ import "../index.css";
 export default function ToolBookingPickup3() {
   const navigate = useNavigate();
   const { toolId } = useParams();
+  const [isConfirming, setIsConfirming] = useState(false);
+
+  // Load booking details from localStorage
+  const bookingDetails = useMemo(() => {
+    const storageKey = `booking_${toolId}_selectedDates`;
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) {
+          const dateArray = JSON.parse(saved).sort();
+          if (dateArray.length > 0) {
+            // Parse dates properly to avoid timezone issues
+            const startDateParts = dateArray[0].split('-');
+            const endDateParts = dateArray[dateArray.length - 1].split('-');
+            const startDate = new Date(parseInt(startDateParts[0]), parseInt(startDateParts[1]) - 1, parseInt(startDateParts[2]));
+            const endDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, parseInt(endDateParts[2]));
+          
+          const formatDate = (date) => {
+            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            return `${days[date.getDay()]} ${months[date.getMonth()]} ${date.getDate().toString().padStart(2, '0')}`;
+          };
+          
+          const formatDateWithTime = (date, time) => {
+            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            return `${days[date.getDay()]} ${months[date.getMonth()]} ${date.getDate().toString().padStart(2, '0')} ${time}`;
+          };
+          
+          return {
+            period: `${formatDate(startDate)} - ${formatDate(endDate)}`,
+            pickup: formatDateWithTime(startDate, "10:00 - 11:00"),
+            return: formatDateWithTime(endDate, "09:00 - 10:00"),
+          };
+        }
+      }
+    } catch (e) {
+      console.error("Error loading booking details:", e);
+    }
+    // Default values if no booking found
+    return {
+      period: "Mon Oct 27 - Wed Oct 29",
+      pickup: "Mon Oct 27 10:00 - 11:00",
+      return: "Wed Oct 29 09:00 - 10:00",
+    };
+  }, [toolId]);
 
   return (
     <>
@@ -108,7 +153,7 @@ export default function ToolBookingPickup3() {
                 <div className="booking-pickup3-text">
                   <p className="booking-pickup3-label">Booking Period</p>
                   <p className="booking-pickup3-description">
-                    Mon Oct 27 - Wed Oct 29
+                    {bookingDetails.period}
                   </p>
                 </div>
               </div>
@@ -124,7 +169,7 @@ export default function ToolBookingPickup3() {
                 <div className="booking-pickup3-text">
                   <p className="booking-pickup3-label">Pickup</p>
                   <p className="booking-pickup3-description">
-                    Mon Oct 27 10:00 - 11:00
+                    {bookingDetails.pickup}
                   </p>
                 </div>
               </div>
@@ -140,7 +185,7 @@ export default function ToolBookingPickup3() {
                 <div className="booking-pickup3-text">
                   <p className="booking-pickup3-label">Return</p>
                   <p className="booking-pickup3-description">
-                    Wed Oct 29 09:00 - 10:00
+                    {bookingDetails.return}
                   </p>
                 </div>
               </div>
@@ -160,10 +205,17 @@ export default function ToolBookingPickup3() {
 
             {/* Confirm Booking Button */}
             <button 
-              className="button-component booking-pickup3-confirm-button"
-              onClick={() => navigate(`/tools/${toolId}/booking-confirmation`)}
+              className={`button-component booking-pickup3-confirm-button ${isConfirming ? "button-loading" : ""}`}
+              disabled={isConfirming}
+              onClick={() => {
+                setIsConfirming(true);
+                // Simulate booking confirmation delay for realism
+                setTimeout(() => {
+                  navigate(`/tools/${toolId}/booking-confirmation`);
+                }, 800);
+              }}
             >
-              Confirm Booking
+              {isConfirming ? "Confirming..." : "Confirm Booking"}
             </button>
           </div>
         </div>

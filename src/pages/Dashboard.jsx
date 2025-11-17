@@ -1,10 +1,68 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import BackgroundBlur from '../components/BackgroundBlur'
 import BottomNav from '../components/BottomNav'
+import { getAppDate, getWeekNumber, isAppDate } from '../utils/appDate'
 import '../index.css'
 
 export default function Dashboard() {
+  const [activeBookingsCount, setActiveBookingsCount] = useState(0);
+
+  // Calculate active bookings count from localStorage
+  useEffect(() => {
+    const calculateBookings = () => {
+      let count = 0;
+      
+      // Count tool bookings
+      Object.keys(localStorage).forEach((key) => {
+        if (key.startsWith("booking_") && key.endsWith("_selectedDates")) {
+          const saved = localStorage.getItem(key);
+          if (saved) {
+            try {
+              const dateArray = JSON.parse(saved);
+              if (dateArray.length > 0) {
+                count++;
+              }
+            } catch (e) {
+              console.error("Error parsing booking:", e);
+            }
+          }
+        }
+      });
+      
+      // Add room bookings (static for now, but could be from localStorage)
+      count += 3; // Data Lab 2, Seminar 1, Research Lab
+      
+      setActiveBookingsCount(count);
+    };
+
+    calculateBookings();
+    
+    // Reload when storage changes (for when bookings are added/removed)
+    const handleStorageChange = () => {
+      calculateBookings();
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also listen for custom booking events
+    const handleBookingChange = () => {
+      calculateBookings();
+    };
+    
+    window.addEventListener('bookingCanceled', handleBookingChange);
+    window.addEventListener('bookingConfirmed', handleBookingChange);
+    
+    // Check periodically for changes (since storage event only fires in other tabs)
+    const interval = setInterval(calculateBookings, 1000);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('bookingCanceled', handleBookingChange);
+      window.removeEventListener('bookingConfirmed', handleBookingChange);
+      clearInterval(interval);
+    };
+  }, []);
   return (
     <>
       <BackgroundBlur />
@@ -13,7 +71,14 @@ export default function Dashboard() {
           {/* Calendar Card */}
           <div className="calendar-card">
             <div className="calendar-header">
-              <h2 className="calendar-title">Oct, Week 42</h2>
+              <h2 className="calendar-title">
+                {(() => {
+                  const appDate = getAppDate();
+                  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                  const weekNumber = getWeekNumber(appDate);
+                  return `${monthNames[appDate.getMonth()]}, Week ${weekNumber}`;
+                })()}
+              </h2>
               <Link to="/profile" className="calendar-profile">
                 <i className="fas fa-user" style={{ color: 'white', fontSize: '20px' }}></i>
               </Link>
@@ -29,13 +94,32 @@ export default function Dashboard() {
                 <span>S</span>
               </div>
               <div className="calendar-days">
-                <span>13</span>
-                <span>14</span>
-                <span>15</span>
-                <span>16</span>
-                <span>17</span>
-                <span>18</span>
-                <span>19</span>
+                {(() => {
+                  const appDate = getAppDate();
+                  // Get the Monday of the week containing October 14th
+                  const dayOfWeek = appDate.getDay();
+                  const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // Monday is 1, Sunday is 0
+                  const monday = new Date(appDate);
+                  monday.setDate(appDate.getDate() + mondayOffset);
+                  
+                  // Generate 7 days starting from Monday
+                  const days = [];
+                  for (let i = 0; i < 7; i++) {
+                    const day = new Date(monday);
+                    day.setDate(monday.getDate() + i);
+                    // Check if this is October 14th (full date match)
+                    const isToday = isAppDate(day);
+                    days.push({ date: day.getDate(), isToday });
+                  }
+                  return days.map((day, index) => (
+                    <span key={index} style={{ position: 'relative' }}>
+                      {day.isToday && (
+                        <div className="calendar-day-today-overlay"></div>
+                      )}
+                      {day.date}
+                    </span>
+                  ));
+                })()}
               </div>
             </div>
           </div>
@@ -48,7 +132,7 @@ export default function Dashboard() {
               </div>
               <span className="bookings-text">Active bookings</span>
             </div>
-            <span className="bookings-count">5</span>
+            <span className="bookings-count">{activeBookingsCount}</span>
           </Link>
 
           {/* Divider */}
@@ -194,6 +278,26 @@ export default function Dashboard() {
           font-size: 16px;
           font-weight: 600;
           color: white;
+        }
+
+        .calendar-days span {
+          position: relative;
+          display: inline-block;
+          z-index: 1;
+        }
+
+        .calendar-day-today-overlay {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: rgba(163, 200, 97, 0.3);
+          border: 1.352px solid #a3c861;
+          z-index: 0;
+          pointer-events: none;
         }
 
         .bookings-bar {

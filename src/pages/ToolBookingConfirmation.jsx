@@ -1,21 +1,110 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
+import { toastManager } from "../utils/toast";
 import "../index.css";
 
 const toolData = {
   "canon-eos-2000d": {
     name: "Canon EOS 2000D",
     category: "Video",
-    image: "/canon-eos-2000d.png", // You'll need to add the actual image path
+    image: "",
+  },
+  "godox-ledp260c": {
+    name: "Godox LEDP260C",
+    category: "Light",
+    image: "",
+  },
+  "rode-videomic-rycote": {
+    name: "Rode VideoMic Rycote",
+    category: "Sound",
+    image: "",
+  },
+  "gopro-hero-11-black-mini": {
+    name: "GoPro Hero 11 Black Mini",
+    category: "Video",
+    image: "",
+  },
+  "joby-gorillapod-500": {
+    name: "Joby Gorillapod 500 Action mount",
+    category: "Mount",
+    image: "",
+  },
+  "hdmi-cable-10m": {
+    name: "HDMI cable 10m",
+    category: "Cable",
+    image: "",
+  },
+  "sony-a7-iii": {
+    name: "Sony A7 III",
+    category: "Video",
+    image: "",
+  },
+  "aputure-300d": {
+    name: "Aputure 300D",
+    category: "Light",
+    image: "",
+  },
+  "shure-sm7b": {
+    name: "Shure SM7B",
+    category: "Sound",
+    image: "",
+  },
+  "dji-mini-3-pro": {
+    name: "DJI Mini 3 Pro",
+    category: "Video",
+    image: "",
+  },
+  "manfrotto-tripod": {
+    name: "Manfrotto Tripod",
+    category: "Mount",
+    image: "",
+  },
+  "xlr-cable-5m": {
+    name: "XLR Cable 5m",
+    category: "Sound",
+    image: "",
+  },
+  "canon-24-70mm-lens": {
+    name: "Canon 24-70mm Lens",
+    category: "Camera",
+    image: "",
+  },
+  "neewer-led-panel": {
+    name: "Neewer LED Panel",
+    category: "Light",
+    image: "",
+  },
+  "zoom-h6-recorder": {
+    name: "Zoom H6 Recorder",
+    category: "Sound",
+    image: "",
+  },
+  "usb-c-cable-3m": {
+    name: "USB-C Cable 3m",
+    category: "IT",
+    image: "",
   },
 };
 
 export default function ToolBookingConfirmation() {
   const navigate = useNavigate();
   const { toolId } = useParams();
-  const tool = toolData[toolId] || toolData["canon-eos-2000d"];
+  const tool = toolData[toolId] || {
+    name: toolId ? toolId.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") : "Tool",
+    category: "Equipment",
+    image: "",
+  };
+
+  useEffect(() => {
+    toastManager.success("Booking confirmed successfully!");
+    
+    // Dispatch event to update Dashboard booking count
+    window.dispatchEvent(new CustomEvent('bookingConfirmed', { 
+      detail: { toolId } 
+    }));
+  }, [toolId]);
 
   // Load booking details from localStorage
   const storageKey = `booking_${toolId}_selectedDates`;
@@ -25,8 +114,11 @@ export default function ToolBookingConfirmation() {
       if (saved) {
         const dateArray = JSON.parse(saved).sort();
         if (dateArray.length > 0) {
-          const startDate = new Date(dateArray[0]);
-          const endDate = new Date(dateArray[dateArray.length - 1]);
+          // Parse dates properly to avoid timezone issues
+          const startDateParts = dateArray[0].split('-');
+          const endDateParts = dateArray[dateArray.length - 1].split('-');
+          const startDate = new Date(parseInt(startDateParts[0]), parseInt(startDateParts[1]) - 1, parseInt(startDateParts[2]));
+          const endDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, parseInt(endDateParts[2]));
           
           const formatDate = (date) => {
             const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import BottomNav from "../components/BottomNav";
@@ -7,6 +7,38 @@ import "../index.css";
 export default function ToolBookingPickup2() {
   const navigate = useNavigate();
   const { toolId } = useParams();
+
+  // Load booking details from localStorage
+  const bookingDetails = useMemo(() => {
+    const storageKey = `booking_${toolId}_selectedDates`;
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) {
+        const dateArray = JSON.parse(saved).sort();
+        if (dateArray.length > 0) {
+          // Parse dates properly to avoid timezone issues
+          const endDateParts = dateArray[dateArray.length - 1].split('-');
+          const endDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, parseInt(endDateParts[2]));
+          
+          const formatDateWithTime = (date, time) => {
+            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            return `${days[date.getDay()]} ${months[date.getMonth()]} ${date.getDate().toString().padStart(2, '0')} ${time}`;
+          };
+          
+          return {
+            return: formatDateWithTime(endDate, "09:00 - 10:00"),
+          };
+        }
+      }
+    } catch (e) {
+      console.error("Error loading booking details:", e);
+    }
+    // Default values if no booking found
+    return {
+      return: "Wed Oct 29 09:00 - 10:00",
+    };
+  }, [toolId]);
 
   return (
     <>
@@ -124,7 +156,7 @@ export default function ToolBookingPickup2() {
                 <div className="booking-pickup2-text">
                   <p className="booking-pickup2-label">Return</p>
                   <p className="booking-pickup2-description">
-                    Wed Oct 27 09:00 - 10:00 at Media City Bergen.
+                    {bookingDetails.return} at Media City Bergen.
                   </p>
                   <p className="booking-pickup2-note">
                     Storage is unstaffed outside of 09:00 - 11:00.

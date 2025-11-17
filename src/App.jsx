@@ -18,11 +18,13 @@ import BookingDetail from "./pages/BookingDetail";
 import Mix100 from "./pages/Mix100";
 import Profile from "./pages/Profile";
 import Seminar1 from "./pages/Seminar1";
+import ToastContainer from "./components/ToastContainer";
 import "./index.css";
 
 function App() {
   return (
     <div style={{ minHeight: "100vh", position: "relative" }}>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Login1 />} />
         <Route path="/login2" element={<Login2 />} />
