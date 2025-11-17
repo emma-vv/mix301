@@ -65,16 +65,22 @@ export default function Rooms() {
           <div className="divider"></div>
 
           {/* Seminar 1 */}
-          <div className="module-card">
+          <Link
+            to="/rooms/seminar1"
+            className="module-card"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <div className="card-glow glow-mix"></div>
             <div className="card-glow glow-jou"></div>
             <div className="module-header">
               <h2 className="module-title">Seminar 1</h2>
-              <StarButton
-                itemId="seminar1"
-                initialStarred={starred.seminar1}
-                onToggle={(starred) => setStarred(prev => ({ ...prev, seminar1: starred }))}
-              />
+              <div onClick={(e) => e.preventDefault()}>
+                <StarButton
+                  itemId="seminar1"
+                  initialStarred={starred.seminar1}
+                  onToggle={(starred) => setStarred(prev => ({ ...prev, seminar1: starred }))}
+                />
+              </div>
             </div>
             <div className="schedule-grid">
               <div className="time-marker" style={{ left: '7.59px' }}>08:00</div>
@@ -99,7 +105,7 @@ export default function Rooms() {
                 JOU100
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Seminar 2 */}
           <div className="module-card">

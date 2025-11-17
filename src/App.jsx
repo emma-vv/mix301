@@ -16,6 +16,7 @@ import ToolBookingConfirmation from "./pages/ToolBookingConfirmation";
 import MyBookings from "./pages/MyBookings";
 import Mix100 from "./pages/Mix100";
 import Profile from "./pages/Profile";
+import Seminar1 from "./pages/Seminar1";
 import "./index.css";
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
         <Route path="/bookings" element={<MyBookings />} />
         <Route path="/mix100" element={<Mix100 />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/rooms/seminar1" element={<Seminar1 />} />
       </Routes>
     </div>
   );
