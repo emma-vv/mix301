@@ -326,7 +326,7 @@ export default function ToolBookingCalendar() {
           <div className="header">
             <button
               className="back-button back-button-visible"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate(`/tools/${toolId}`)}
               aria-label="Back"
               style={{
                 width: "42.657px",
@@ -697,8 +697,9 @@ export default function ToolBookingCalendar() {
 
         .legend-items {
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
+          gap: 40px;
         }
 
         .legend-item {
