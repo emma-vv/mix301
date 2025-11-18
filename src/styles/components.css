@@ -322,8 +322,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  border: 1.352px solid rgba(255, 255, 255, 0.50);
-  background: rgba(255, 255, 255, 0.00);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(101, 33, 241, 0.5) 0%, rgba(123, 63, 242, 0.5) 100%);
   box-shadow: 0 8px 32px 0 rgba(101, 33, 241, 0.60), 0 1px 2px 0 rgba(255, 255, 255, 0.20) inset;
   font-size: 16px;
   font-weight: 600;
@@ -334,7 +334,7 @@
 }
 
 .button-component:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(135deg, rgba(123, 63, 242, 0.5) 0%, rgba(139, 79, 243, 0.5) 100%);
 }
 
 .button-component:disabled,

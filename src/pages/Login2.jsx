@@ -1,19 +1,43 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import BackgroundBlur from '../components/BackgroundBlur'
+import { toastManager } from '../utils/toast'
 import '../index.css'
 
 export default function Login2() {
   const navigate = useNavigate()
+  
+  const handleStepClick = (step) => {
+    if (step === 1) {
+      // Can go back to step 1 since they clicked login button
+      navigate('/');
+    } else if (step === 2) {
+      // Already on step 2
+      return;
+    } else if (step === 3) {
+      // Can only go to step 3 if login method was picked
+      const hasPickedMethod = localStorage.getItem('login_has_picked_method') === 'true';
+      if (hasPickedMethod) {
+        const method = localStorage.getItem('login_selected_method') || 'Microsoft';
+        navigate('/login3', { state: { method } });
+      } else {
+        toastManager.info('Please select a login method first');
+      }
+    }
+  };
+
+  const handleMethodClick = (method) => {
+    localStorage.setItem('login_has_picked_method', 'true');
+    localStorage.setItem('login_selected_method', method);
+    navigate('/login3', { state: { method } });
+  };
 
   return (
     <>
       <BackgroundBlur />
       <div className="login2-body" style={{ position: 'relative', zIndex: 1 }}>
         <div className="login2-header">
-          <button className="back-button-login" onClick={() => navigate('/')}>
-            <i className="fas fa-chevron-left"></i>
-          </button>
+          <div style={{ width: '42.66px', height: '42.66px' }}></div>
           <div style={{ width: '42.66px', height: '42.66px' }}></div>
           <div style={{ width: '42.66px', height: '42.66px' }}></div>
         </div>
@@ -21,11 +45,25 @@ export default function Login2() {
         <div className="login2-content">
           <div className="login2-header-section">
             <div className="step-indicators">
-              <div className="step-indicator completed">
+              <div 
+                className="step-indicator completed"
+                onClick={() => handleStepClick(1)}
+                style={{ cursor: 'pointer' }}
+              >
                 <i className="fas fa-check"></i>
               </div>
               <div className="step-connector"></div>
-              <div className="step-indicator active">2</div>
+              <div 
+                className="step-indicator active"
+                onClick={() => handleStepClick(2)}
+                style={{ cursor: 'pointer' }}
+              >2</div>
+              <div className="step-connector"></div>
+              <div 
+                className="step-indicator"
+                onClick={() => handleStepClick(3)}
+                style={{ cursor: 'pointer' }}
+              >3</div>
             </div>
             <div className="login2-text-container">
               <h1 className="login2-title-text">Choose Login Method</h1>
@@ -34,7 +72,7 @@ export default function Login2() {
           </div>
 
           <div className="login-methods">
-            <div className="login-method-card" onClick={() => navigate('/dashboard')}>
+            <div className="login-method-card" onClick={() => handleMethodClick('Microsoft')}>
               <div className="login-method-icon microsoft">
                 <i className="fab fa-microsoft" style={{ fontSize: '24px', color: '#6521f1' }}></i>
               </div>
@@ -45,7 +83,7 @@ export default function Login2() {
               <i className="fas fa-chevron-right login-method-arrow" style={{ color: 'white' }}></i>
             </div>
 
-            <div className="login-method-card" onClick={() => navigate('/dashboard')}>
+            <div className="login-method-card" onClick={() => handleMethodClick('Feide')}>
               <div className="login-method-icon feide">
                 <i className="fas fa-graduation-cap" style={{ fontSize: '24px', color: 'white' }}></i>
               </div>
