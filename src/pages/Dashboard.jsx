@@ -13,7 +13,7 @@ export default function Dashboard() {
     const calculateBookings = () => {
       let count = 0;
       
-      // Count tool bookings
+      // Count tool bookings from localStorage
       Object.keys(localStorage).forEach((key) => {
         if (key.startsWith("booking_") && key.endsWith("_selectedDates")) {
           const saved = localStorage.getItem(key);
@@ -29,6 +29,12 @@ export default function Dashboard() {
           }
         }
       });
+      
+      // Add default bookings if user has never booked before and has no real bookings
+      const hasEverBooked = localStorage.getItem('user_has_booked') === 'true';
+      if (count === 0 && !hasEverBooked) {
+        count += 2; // Add 2 default tool bookings (canon-eos-2000d-default, godox-ledp260c-default)
+      }
       
       // Add room bookings (static for now, but could be from localStorage)
       count += 3; // Data Lab 2, Seminar 1, Research Lab
@@ -191,7 +197,7 @@ export default function Dashboard() {
       <BottomNav />
       <style>{`
         .dashboard-body {
-          padding: 0 24px 24px 24px;
+          padding: 0 24px 115px 24px;
           min-height: 100vh;
           display: flex;
           flex-direction: column;

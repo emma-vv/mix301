@@ -263,6 +263,13 @@ export default function MyBookings() {
     // Separate tools and rooms
     const tools = allBookings.filter(b => b.type === "tool");
     
+    // Check if user has ever made a booking (check for any booking history marker)
+    // We'll use a flag in localStorage to track if user has ever created a booking
+    const hasEverBooked = localStorage.getItem('user_has_booked') === 'true';
+    
+    // Check if we have any real bookings (from localStorage) right now
+    const hasRealBookings = tools.length > 0;
+    
     // Add example room bookings (these would come from localStorage or API in real app)
     // For now, we'll add them as static data
     const exampleRoomBookings = [
@@ -289,13 +296,14 @@ export default function MyBookings() {
       },
     ];
     
-    // Add example tool bookings if needed to match Dashboard count (5 total)
-    // Dashboard shows 5 active bookings, so we need 2 tools + 3 rooms
-    // Note: The first booking (canon-eos-2000d) is only added if there are no real bookings
-    // The second booking (godox-ledp260c) is always added as a default and cannot be canceled
-    if (tools.length === 0) {
+    // Only add default tool bookings if:
+    // 1. There are NO real bookings right now
+    // 2. AND the user has NEVER made a booking before (first time user)
+    // This prevents defaults from reappearing after user removes all bookings
+    if (!hasRealBookings && !hasEverBooked) {
+      // Add two default bookings only for first-time users with no bookings
       tools.push({
-        id: "canon-eos-2000d",
+        id: "canon-eos-2000d-default",
         name: "Canon EOS 2000D",
         icon: "fa-wrench",
         type: "tool",
@@ -303,14 +311,10 @@ export default function MyBookings() {
         category: "Video",
         additionalNotes: "Includes: DSLR camera, 2 lenses (24-70mm, 50mm), tripod, memory cards, battery pack.",
         startDate: new Date(),
-        isDefault: true, // Mark as default since it's added when no real bookings exist
+        isDefault: true, // Mark as default so it can't be canceled
       });
-    }
-    // Always ensure we have at least 2 tool bookings to match the expected count
-    // The second one (godox-ledp260c) is always a default and should not be cancelable
-    if (tools.length === 1) {
       tools.push({
-        id: "godox-ledp260c",
+        id: "godox-ledp260c-default",
         name: "Godox LEDP260C",
         icon: "fa-wrench",
         type: "tool",

@@ -214,7 +214,7 @@ export default function ToolBookingPickup3() {
                 }, 800);
               }}
             >
-              {isConfirming ? "Confirming..." : "Confirm Booking"}
+              <span>{isConfirming ? "Confirming..." : "Confirm Booking"}</span>
             </button>
           </div>
         </div>

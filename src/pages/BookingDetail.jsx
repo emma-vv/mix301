@@ -401,8 +401,19 @@ export default function BookingDetail() {
                 gap: "12px",
               }}
               onClick={() => {
-                // Only remove booking from localStorage if it's not a default booking
-                if (booking.id && !booking.isDefault) {
+                // Handle default bookings differently - they don't exist in localStorage
+                if (booking.isDefault) {
+                  // Mark that user has interacted with bookings, so defaults won't come back
+                  localStorage.setItem('user_has_booked', 'true');
+                  
+                  toastManager.success("Booking removed");
+                  
+                  // Dispatch custom event to trigger reload on MyBookings page
+                  window.dispatchEvent(new CustomEvent('bookingCanceled', { 
+                    detail: { bookingId: booking.id }
+                  }));
+                } else if (booking.id) {
+                  // Remove real booking from localStorage
                   const storageKey = `booking_${booking.id}_selectedDates`;
                   localStorage.removeItem(storageKey);
                   
@@ -416,8 +427,6 @@ export default function BookingDetail() {
                   window.dispatchEvent(new CustomEvent('bookingCanceled', { 
                     detail: { bookingId: booking.id }
                   }));
-                } else {
-                  toastManager.info("This booking cannot be cancelled");
                 }
                 
                 // Navigate back to bookings page

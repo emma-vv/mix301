@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackgroundBlur from "../components/BackgroundBlur";
 import { toastManager } from "../utils/toast";
@@ -90,6 +90,8 @@ const toolData = {
 export default function ToolBookingConfirmation() {
   const navigate = useNavigate();
   const { toolId } = useParams();
+  const hasShownToast = useRef(false);
+  
   const tool = toolData[toolId] || {
     name: toolId ? toolId.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") : "Tool",
     category: "Equipment",
@@ -97,7 +99,14 @@ export default function ToolBookingConfirmation() {
   };
 
   useEffect(() => {
-    toastManager.success("Booking confirmed successfully!");
+    // Only show toast once, even if component re-renders (React StrictMode)
+    if (!hasShownToast.current) {
+      toastManager.success("Booking confirmed successfully!");
+      hasShownToast.current = true;
+    }
+    
+    // Mark that user has ever made a booking (prevents defaults from reappearing)
+    localStorage.setItem('user_has_booked', 'true');
     
     // Dispatch event to update Dashboard booking count
     window.dispatchEvent(new CustomEvent('bookingConfirmed', { 
