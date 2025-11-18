@@ -19,6 +19,7 @@ import Mix100 from "./pages/Mix100";
 import Profile from "./pages/Profile";
 import Seminar1 from "./pages/Seminar1";
 import ToastContainer from "./components/ToastContainer";
+import ScrollToTop from "./components/ScrollToTop";
 import "./index.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     <div
       style={{ minHeight: "100vh", position: "relative", transform: "none" }}
     >
+      <ScrollToTop />
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Login1 />} />
