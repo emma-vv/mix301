@@ -43,7 +43,7 @@ export default function Login1() {
               <div className="step-connector"></div>
               <div className="step-indicator">2</div>
             </div>
-            <div>
+            <div className="login-text-container">
               <h1 className="login-title">Welcome to Aurora</h1>
               <p className="login-subtitle">Please log in to continue</p>
             </div>
@@ -109,8 +109,15 @@ export default function Login1() {
           width: 100%;
         }
 
+        .login-text-container {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+        }
+
         .login-title {
-          font-size: 24px;
+          font-size: 18px;
           font-weight: 600;
           color: white;
           text-align: center;
@@ -119,7 +126,7 @@ export default function Login1() {
         }
 
         .login-subtitle {
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 400;
           color: rgba(255, 255, 255, 0.6);
           text-align: center;

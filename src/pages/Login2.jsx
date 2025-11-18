@@ -27,7 +27,7 @@ export default function Login2() {
               <div className="step-connector"></div>
               <div className="step-indicator active">2</div>
             </div>
-            <div>
+            <div className="login2-text-container">
               <h1 className="login2-title-text">Choose Login Method</h1>
               <p className="login2-subtitle">Select your preferred login option</p>
             </div>
@@ -104,8 +104,15 @@ export default function Login2() {
           align-items: center;
         }
 
+        .login2-text-container {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+        }
+
         .login2-title-text {
-          font-size: 24px;
+          font-size: 18px;
           font-weight: 600;
           color: white;
           text-align: center;
@@ -114,7 +121,7 @@ export default function Login2() {
         }
 
         .login2-subtitle {
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 400;
           color: rgba(255, 255, 255, 0.6);
           text-align: center;
