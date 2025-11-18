@@ -247,11 +247,34 @@ export default function ToolBookingPickup3() {
           flex-shrink: 0;
           position: relative;
           background: rgba(101, 33, 241, 0.15);
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: scale(1);
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+        }
+
+        .step-indicator:active {
+          transform: scale(0.92);
+          transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .step-indicator.step-active {
-          background: #6521f1;
+          background: linear-gradient(135deg, #6521f1 0%, #7B3FF2 100%);
           color: white;
+          transform: scale(1.05);
+          box-shadow: 0 4px 16px rgba(101, 33, 241, 0.5);
+          border-color: rgba(255, 255, 255, 0.3);
+          animation: stepPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes stepPulse {
+          0%, 100% {
+            box-shadow: 0 4px 16px rgba(101, 33, 241, 0.5);
+          }
+          50% {
+            box-shadow: 0 4px 20px rgba(101, 33, 241, 0.7);
+          }
         }
 
         .step-indicator.step-inactive {
@@ -260,11 +283,25 @@ export default function ToolBookingPickup3() {
         }
 
         .step-indicator.step-completed {
-          background: rgba(101, 33, 241, 0.15);
+          background: linear-gradient(135deg, rgba(163, 200, 97, 0.8) 0%, rgba(193, 241, 90, 0.8) 100%);
           color: white;
           display: flex;
           align-items: center;
           justify-content: center;
+          animation: stepComplete 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+          border-color: rgba(163, 200, 97, 0.5);
+        }
+
+        @keyframes stepComplete {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.2);
+          }
+          100% {
+            transform: scale(1);
+          }
         }
 
         .step-connector {
@@ -272,6 +309,30 @@ export default function ToolBookingPickup3() {
           height: 1.986px;
           background: rgba(101, 33, 241, 0.3);
           flex-shrink: 0;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .step-connector::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transition: left 0.6s ease;
+        }
+
+        .step-indicator.step-active ~ .step-connector,
+        .step-indicator.step-completed ~ .step-connector {
+          background: rgba(101, 33, 241, 0.5);
+        }
+
+        .step-indicator.step-active ~ .step-connector::after,
+        .step-indicator.step-completed ~ .step-connector::after {
+          left: 100%;
         }
 
         .booking-pickup3-content {

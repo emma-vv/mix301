@@ -19,6 +19,9 @@ export default function ToolBookingCalendar() {
   // Check if this is an edit booking (from edit button) or a new booking
   const isEditBooking = new URLSearchParams(location.search).get('edit') === 'true';
   
+  // Get booking data from location state (if coming from BookingDetail)
+  const bookingFromState = location.state;
+  
   // Get storage key for this tool (memoized to avoid unnecessary re-renders)
   const storageKey = useMemo(() => `booking_${toolId}_selectedDates`, [toolId]);
   const currentDateKey = useMemo(() => `booking_${toolId}_currentDate`, [toolId]);
@@ -326,7 +329,17 @@ export default function ToolBookingCalendar() {
           <div className="header">
             <button
               className="back-button back-button-visible"
-              onClick={() => navigate(`/tools/${toolId}`)}
+              onClick={() => {
+                // If we came from BookingDetail (has booking state), go back to booking detail
+                if (bookingFromState && bookingFromState.id) {
+                  navigate(`/bookings/${bookingFromState.id}`, {
+                    state: bookingFromState
+                  });
+                } else {
+                  // Otherwise, go back to tool detail
+                  navigate(`/tools/${toolId}`);
+                }
+              }}
               aria-label="Back"
               style={{
                 width: "42.657px",
@@ -582,8 +595,8 @@ export default function ToolBookingCalendar() {
           position: absolute;
           background: rgba(254, 66, 66, 0.4);
           border: 1.35px solid rgba(254, 66, 66, 0.05);
-          width: 39px;
-          height: 39px;
+          width: 28px;
+          height: 28px;
           border-radius: 50%;
           z-index: 0;
           pointer-events: none;
@@ -596,8 +609,8 @@ export default function ToolBookingCalendar() {
           position: absolute;
           background: rgba(163, 200, 97, 0.3);
           border: 1.352px solid #a3c861;
-          width: 39px;
-          height: 39px;
+          width: 28px;
+          height: 28px;
           border-radius: 50%;
           z-index: 0;
           pointer-events: none;

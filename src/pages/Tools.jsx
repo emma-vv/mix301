@@ -445,6 +445,17 @@ export default function Tools() {
           box-sizing: border-box;
           width: calc((100% - 24px) / 2);
           max-width: calc((100% - 24px) / 2);
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: scale(1);
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+        }
+
+        .tools-equipment-card:active {
+          transform: scale(0.96);
+          background: rgba(255, 255, 255, 0.1);
+          transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .tools-equipment-row-3 .tools-equipment-card {
@@ -591,6 +602,16 @@ export default function Tools() {
 
         .tools-equipment-card {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translateY(0);
+        }
+
+        .tools-equipment-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .tools-equipment-card:active {
+          transform: translateY(-2px);
         }
 
         .tools-equipment-card-enter {

@@ -329,12 +329,19 @@
   font-weight: 600;
   color: white;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: "Roboto", sans-serif;
+  transform: scale(1);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.button-component:hover:not(:disabled) {
+.button-component:active:not(:disabled) {
   background: linear-gradient(135deg, rgba(123, 63, 242, 0.5) 0%, rgba(139, 79, 243, 0.5) 100%);
+  transform: scale(0.97);
+  box-shadow: 0 4px 16px 0 rgba(101, 33, 241, 0.50), 0 1px 2px 0 rgba(255, 255, 255, 0.20) inset;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button-component:disabled,
@@ -365,11 +372,21 @@
   color: white;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+  cursor: pointer;
+}
+
+.step-indicator:active {
+  transform: scale(0.92);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .step-indicator.active {
   background: linear-gradient(to right, #6521f1, #30136e);
   border-color: transparent;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(101, 33, 241, 0.4);
 }
 
 .step-indicator.completed {
@@ -379,6 +396,19 @@
     rgba(168, 212, 68, 0.8)
   );
   border-color: transparent;
+  animation: stepComplete 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes stepComplete {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .step-indicator.completed i {
@@ -693,11 +723,11 @@
 @keyframes pageFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 

@@ -112,16 +112,21 @@ export default function Courses() {
           position: relative;
           overflow: hidden;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
           display: flex;
           align-items: center;
           justify-content: space-between;
           height: 51px;
           text-decoration: none;
+          transform: scale(1);
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
         }
 
-        .course-list-item:hover {
+        .course-list-item:active {
           background: rgba(255, 255, 255, 0.1);
+          transform: scale(0.98);
+          transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .course-title {

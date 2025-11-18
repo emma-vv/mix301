@@ -184,11 +184,18 @@ export default function Login2() {
           align-items: center;
           gap: 24px;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translateY(0);
         }
 
         .login-method-card:hover {
           background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-method-card:active {
+          transform: translateY(0);
         }
 
         .login-method-icon {
@@ -253,16 +260,43 @@ export default function Login2() {
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: scale(1);
+          cursor: pointer;
+          background: rgba(101, 33, 241, 0.15);
+          color: rgba(255, 255, 255, 0.4);
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+        }
+
+        .step-indicator:active {
+          transform: scale(0.92);
+          transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .step-indicator.active {
-          background: #6521f1;
+          background: linear-gradient(135deg, #6521f1 0%, #7B3FF2 100%);
           color: white;
+          transform: scale(1.05);
+          box-shadow: 0 4px 16px rgba(101, 33, 241, 0.5);
+          border-color: rgba(255, 255, 255, 0.3);
+          animation: stepPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes stepPulse {
+          0%, 100% {
+            box-shadow: 0 4px 16px rgba(101, 33, 241, 0.5);
+          }
+          50% {
+            box-shadow: 0 4px 20px rgba(101, 33, 241, 0.7);
+          }
         }
 
         .step-indicator.completed {
-          background: rgba(101, 33, 241, 0.15);
+          background: linear-gradient(135deg, rgba(163, 200, 97, 0.8) 0%, rgba(193, 241, 90, 0.8) 100%);
           color: white;
+          animation: stepComplete 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+          border-color: rgba(163, 200, 97, 0.5);
         }
 
         .step-indicator.completed i {
@@ -270,10 +304,47 @@ export default function Login2() {
           color: white;
         }
 
+        @keyframes stepComplete {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.2);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+
         .step-connector {
           width: 47.982px;
           height: 1.986px;
           background: rgba(101, 33, 241, 0.3);
+          flex-shrink: 0;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .step-connector::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transition: left 0.6s ease;
+        }
+
+        .step-indicator.active ~ .step-connector,
+        .step-indicator.completed ~ .step-connector {
+          background: rgba(101, 33, 241, 0.5);
+        }
+
+        .step-indicator.active ~ .step-connector::after,
+        .step-indicator.completed ~ .step-connector::after {
+          left: 100%;
         }
       `}</style>
     </>

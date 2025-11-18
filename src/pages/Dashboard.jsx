@@ -364,14 +364,20 @@ export default function Dashboard() {
           position: relative;
           overflow: hidden;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
           text-decoration: none;
           display: block;
           width: 100%;
+          transform: scale(1);
+          opacity: 1;
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
         }
 
-        .module-card-dashboard:hover {
+        .module-card-dashboard:active {
           background: rgba(255, 255, 255, 0.1);
+          transform: scale(0.98);
+          transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .module-card-dashboard.rooms {
@@ -465,6 +471,11 @@ export default function Dashboard() {
           height: 19.987px;
           color: white;
           flex-shrink: 0;
+          transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .module-card-dashboard:active .module-arrow {
+          transform: translateX(2px);
         }
 
         .module-glow {
